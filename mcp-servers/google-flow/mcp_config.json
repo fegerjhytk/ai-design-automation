@@ -1,0 +1,14 @@
+{
+  "mcpServers": {
+    "google-flow": {
+      "command": "node",
+      "args": [
+        "/Users/admin/.gemini/config/plugins/google-flow/dist/index.js"
+      ],
+      "env": {
+        "GOOGLE_FLOW_CDP_URL": "http://127.0.0.1:9222",
+        "GOOGLE_FLOW_DOWNLOAD_DIR": "/Users/admin/Downloads"
+      }
+    }
+  }
+}

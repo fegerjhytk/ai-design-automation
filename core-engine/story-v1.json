@@ -1,0 +1,11 @@
+{
+  "width": 1080,
+  "height": 1920,
+  "root": "DESIGN_STORY",
+  "safe": [72, 250, 936, 1330],
+  "slots": {
+    "HEADLINE": {"box": [72, 260, 936, 380], "min": 88, "max": 128, "font": "Arial-BoldMT"},
+    "BODY": {"box": [72, 720, 936, 240], "min": 36, "max": 44, "font": "ArialMT"},
+    "CTA": {"box": [72, 1450, 936, 120], "min": 40, "max": 52, "font": "Arial-BoldMT"}
+  }
+}

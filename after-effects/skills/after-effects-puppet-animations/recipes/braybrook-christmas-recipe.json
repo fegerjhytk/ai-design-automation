@@ -1,0 +1,90 @@
+{
+  "schemaVersion": 3,
+  "units": {
+    "Left_Logo__2": {
+      "stage": 0
+    },
+    "Left_Christmas_Christmas__6": {
+      "stage": 0
+    },
+    "Left_Day_Day__5": {
+      "stage": 0
+    },
+    "Left_You_bring_the_family_We_ll_bring_the_festive_fun___4": {
+      "stage": 1
+    },
+    "Left_Santa_Kids_Gifts_Family_Photo_Booth_Huge_Christmas_Tree_More__3": {
+      "stage": 1
+    },
+    "Right_Illustration_19__20": {
+      "stage": 2
+    },
+    "Right_TWO_CHRISTMAS_HAMPERS_TO_BE_WON__19": {
+      "stage": 3
+    },
+    "Right_Three_Lunch_Sittings__18": {
+      "stage": 3
+    },
+    "Right_11_30AM_to_1_30PM__17": {
+      "stage": 3
+    },
+    "Right_Illustration_12__13": {
+      "stage": 3
+    },
+    "Right_12_00PM_to_2_00PM__16": {
+      "stage": 3
+    },
+    "Right_Illustration_11__12": {
+      "stage": 3
+    },
+    "Right_1_30PM_to_3_30PM__14": {
+      "stage": 3
+    },
+    "Right__Function_Room___15": {
+      "stage": 3
+    },
+    "Right__110_a_head_Adult_Child_Aged_12___11": {
+      "stage": 4
+    },
+    "Right__49_a_head_Child_Aged_4_12___10": {
+      "stage": 4
+    },
+    "Right__25_a_head_Guest_Child_Aged_Under_4___9": {
+      "stage": 4
+    },
+    "Bottom_Ribbon__26": {
+      "stage": 5
+    },
+    "Right__100_DEPOSIT_PER_BOOKING__25": {
+      "stage": 6
+    },
+    "Right_Balance_due_by_14_December__24": {
+      "stage": 6
+    },
+    "Right_Illustration_22__23": {
+      "stage": 6
+    },
+    "Right_BOOK_YOUR_CHRISTMAS_TABLE__22": {
+      "stage": 6
+    },
+    "Right_Bookings_essential_Dinner_closed___21": {
+      "stage": 6
+    },
+    "Ambient_Pasteboard__1": {
+      "stage": 0,
+      "background": true
+    },
+    "Ambient_Ornament__7": {
+      "stage": 0,
+      "background": true
+    },
+    "Ambient_Ornament__8": {
+      "stage": 0,
+      "background": true
+    },
+    "BG_Clipped_Artboard__27": {
+      "stage": 0,
+      "background": true
+    }
+  }
+}

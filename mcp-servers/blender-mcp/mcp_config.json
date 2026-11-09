@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "blender-mcp": {
+      "command": "/Users/admin/.gemini/antigravity/bin/node",
+      "args": [
+        "/Users/admin/.gemini/config/plugins/blender-mcp/server.js"
+      ]
+    }
+  }
+}

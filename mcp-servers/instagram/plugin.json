@@ -1,0 +1,12 @@
+{
+  "name": "instagram",
+  "displayName": "Instagram MCP (Multi-Account)",
+  "version": "1.0.0",
+  "description": "Multi-account Instagram integration for publishing Feed Photos, Carousels, Reels/Videos, Stories (Status), and streaming Instagram Live broadcasts (local video file RTMPS streaming and OBS Stream URL/Key + live controls) directly from Antigravity.",
+  "suggestedPrompts": [
+    "List my connected Instagram accounts or log in a new account",
+    "Post a photo to Instagram on a specific account",
+    "Publish a video Reel or 9:16 Story to Instagram",
+    "Start an Instagram Live stream from a video file or generate OBS stream key"
+  ]
+}

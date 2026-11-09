@@ -1,0 +1,11 @@
+{
+  "name": "magnific",
+  "displayName": "Magnific AI",
+  "version": "1.0.0",
+  "description": "Magnific AI integration for ultra-realistic image generation with Mystic, prompt-guided upscaling, background removal, and local asset downloading.",
+  "suggestedPrompts": [
+    "Generate a high-resolution Mystic image of a futuristic neon city",
+    "Upscale this image 2x and download it to my Downloads folder",
+    "Remove the background from this image and save the cutout"
+  ]
+}

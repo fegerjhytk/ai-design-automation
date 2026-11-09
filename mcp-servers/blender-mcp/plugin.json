@@ -1,0 +1,11 @@
+{
+  "name": "blender-mcp",
+  "displayName": "Blender MCP (Live Viewport & Headless 3D)",
+  "version": "1.2.0",
+  "description": "Live two-way Blender 5.2 viewport control, bpy code execution, Poly Haven HDRI/texture integration, viewport screenshot capture, and headless rendering.",
+  "suggestedPrompts": [
+    "Check my Blender MCP connection status and inspect the current scene",
+    "Create a metallic Suzanne monkey with 3-point lighting in Blender",
+    "Download a studio HDRI from Poly Haven into Blender and render a preview"
+  ]
+}

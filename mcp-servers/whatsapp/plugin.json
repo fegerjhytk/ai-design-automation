@@ -1,0 +1,11 @@
+{
+  "name": "whatsapp",
+  "displayName": "WhatsApp MCP",
+  "version": "1.0.0",
+  "description": "WhatsApp integration for sending messages, reading chat history, checking connection status, and automated workflows via Baileys Multi-Device socket.",
+  "suggestedPrompts": [
+    "Check WhatsApp connection status",
+    "Send a WhatsApp message to a contact",
+    "List recent WhatsApp chats"
+  ]
+}

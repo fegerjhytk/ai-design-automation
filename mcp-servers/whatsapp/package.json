@@ -1,0 +1,18 @@
+{
+  "name": "whatsapp-mcp",
+  "version": "1.0.0",
+  "description": "WhatsApp Personal Account MCP Server for Antigravity",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "pair": "node pair.js",
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "@whiskeysockets/baileys": "^6.7.16",
+    "node-cache": "^5.1.2",
+    "open": "^10.1.0",
+    "pino": "^9.6.0",
+    "qrcode-terminal": "^0.12.0"
+  }
+}

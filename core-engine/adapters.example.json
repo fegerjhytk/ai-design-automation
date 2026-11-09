@@ -1,0 +1,12 @@
+{
+  "plan": {"argv": ["/usr/bin/python3", "/absolute/adapters/improver.py"], "version": "1"},
+  "photoshop": {"argv": ["/usr/bin/python3", "/absolute/adapters/photoshop.py"], "version": "1", "timeout": 600},
+  "icons": {"argv": ["/usr/bin/python3", "/absolute/adapters/magnific.py"], "version": "1"},
+  "recreate": {"argv": ["/usr/bin/python3", "/absolute/adapters/recreate.py"], "version": "1"},
+  "snapshot": {"argv": ["/usr/bin/python3", "/absolute/adapters/illustrator-snapshot.py"], "version": "1"},
+  "compose": {"argv": ["/usr/bin/python3", "/absolute/adapters/illustrator-editor.py"], "version": "1"},
+  "cleanup": {"argv": ["/usr/bin/python3", "/absolute/adapters/vector-first-aid.py"], "version": "1"},
+  "render": {"argv": ["/usr/bin/python3", "/absolute/adapters/illustrator-render.py"], "version": "1"},
+  "preflight": {"argv": ["/usr/bin/python3", "/absolute/adapters/preflight.py"], "version": "1"},
+  "upload": {"argv": ["/usr/bin/python3", "/absolute/adapters/canva-uploader.py"], "version": "1"}
+}

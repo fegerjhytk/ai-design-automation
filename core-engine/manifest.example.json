@@ -1,0 +1,13 @@
+{
+  "revision": 1,
+  "direction": "refined",
+  "template": "story-v1",
+  "document": "/absolute/jobs/campaign-story.ai",
+  "artboard": 0,
+  "copy_file": "/absolute/jobs/frozen-copy.json",
+  "copy_sha256": "REPLACE_WITH_SHA256_OF_FROZEN_COPY",
+  "needs": {"photoshop": true, "icons": false, "recreate": false},
+  "candidate": "/absolute/jobs/candidate-story.png",
+  "final": "/absolute/delivery/campaign-story.png",
+  "upload_authorized": false
+}

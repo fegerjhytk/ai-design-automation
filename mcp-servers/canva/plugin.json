@@ -1,0 +1,12 @@
+{
+  "name": "canva",
+  "displayName": "Canva MCP (Multi-Account)",
+  "version": "1.0.0",
+  "description": "Multi-account Canva integration for Antigravity supporting Personal and Company accounts with automated design creation, editing, asset manipulation, background removal, layer separation, brand kits, and exports.",
+  "suggestedPrompts": [
+    "Check my Canva MCP account status",
+    "Switch Canva MCP to my company account",
+    "Search my recent Canva designs",
+    "Generate a new Canva presentation on modern AI architecture"
+  ]
+}

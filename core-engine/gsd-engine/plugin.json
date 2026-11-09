@@ -1,0 +1,12 @@
+{
+  "name": "get-shit-done",
+  "displayName": "Get Shit Done (GSD)",
+  "version": "1.42.3",
+  "description": "Spec-driven context engineering, meta-prompting, and phased project execution workflow (GSD) for Antigravity.",
+  "logo": "assets/logo.svg",
+  "suggestedPrompts": [
+    "/gsd-help",
+    "/gsd-new-project",
+    "/gsd-plan-phase"
+  ]
+}

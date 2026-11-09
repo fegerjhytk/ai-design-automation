@@ -1,0 +1,11 @@
+{
+  "width": 1080,
+  "height": 1080,
+  "root": "DESIGN_SQUARE",
+  "safe": [64, 64, 952, 952],
+  "slots": {
+    "HEADLINE": {"box": [64, 72, 920, 290], "min": 88, "max": 120, "font": "Arial-BoldMT"},
+    "BODY": {"box": [64, 390, 820, 180], "min": 32, "max": 40, "font": "ArialMT"},
+    "CTA": {"box": [64, 910, 800, 100], "min": 36, "max": 48, "font": "Arial-BoldMT"}
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "whatsapp": {
+      "command": "node",
+      "args": [
+        "/Users/admin/.gemini/config/plugins/whatsapp/server.js"
+      ]
+    }
+  }
+}

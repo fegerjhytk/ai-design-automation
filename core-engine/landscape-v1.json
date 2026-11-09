@@ -1,0 +1,11 @@
+{
+  "width": 1920,
+  "height": 1080,
+  "root": "DESIGN_LANDSCAPE",
+  "safe": [96, 72, 1728, 936],
+  "slots": {
+    "HEADLINE": {"box": [96, 100, 900, 330], "min": 96, "max": 136, "font": "Arial-BoldMT"},
+    "BODY": {"box": [96, 500, 820, 240], "min": 36, "max": 48, "font": "ArialMT"},
+    "CTA": {"box": [96, 860, 820, 120], "min": 40, "max": 56, "font": "Arial-BoldMT"}
+  }
+}

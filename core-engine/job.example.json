@@ -1,0 +1,14 @@
+{
+  "document": "/absolute/path/to/jobs/campaign-001.ai",
+  "template": "square-v1",
+  "artboard": 0,
+  "op": "inspect",
+  "copy_file": "/absolute/path/to/copy.example.json",
+  "copy_sha256": "REPLACE_WITH_SHA256_OF_COPY_FILE",
+  "expectedState": "FOR_PATCH_COPY_controlledSlotState_FROM_INSPECT_REPORT",
+  "changes": [
+    {"name": "HEADLINE", "text": "MAKE ROOM\nFOR MORE", "size": 120, "color": [255, 255, 255]},
+    {"name": "BODY", "text": "A better day starts here.", "size": 40},
+    {"name": "CTA", "text": "EXPLORE NOW", "size": 48}
+  ]
+}

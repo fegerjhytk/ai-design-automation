@@ -1,0 +1,36 @@
+{
+  "ratios": {
+    "1:1": {
+      "name": "Square / Feed",
+      "width": 1080,
+      "height": 1080,
+      "safe_margin": 60,
+      "content_bounds": { "left": 60, "top": 60, "right": 1020, "bottom": 1020 },
+      "headline_zone": { "top": 120, "height": 260 },
+      "hero_image_zone": { "top": 380, "height": 450 },
+      "cta_zone": { "top": 860, "height": 100, "width": 420 }
+    },
+    "9:16": {
+      "name": "Vertical / Reels / Stories",
+      "width": 1080,
+      "height": 1920,
+      "safe_margin": 80,
+      "safe_area_top": 250,
+      "safe_area_bottom": 320,
+      "content_bounds": { "left": 80, "top": 250, "right": 1000, "bottom": 1600 },
+      "headline_zone": { "top": 300, "height": 380 },
+      "hero_image_zone": { "top": 700, "height": 720 },
+      "cta_zone": { "top": 1450, "height": 120, "width": 480 }
+    },
+    "16:9": {
+      "name": "Landscape / Display",
+      "width": 1920,
+      "height": 1080,
+      "safe_margin": 80,
+      "content_bounds": { "left": 80, "top": 80, "right": 1840, "bottom": 1000 },
+      "headline_zone": { "left": 100, "top": 200, "width": 800, "height": 350 },
+      "hero_image_zone": { "left": 950, "top": 120, "width": 850, "height": 840 },
+      "cta_zone": { "left": 100, "top": 620, "height": 100, "width": 400 }
+    }
+  }
+}

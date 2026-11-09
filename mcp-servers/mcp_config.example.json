@@ -1,0 +1,69 @@
+{
+  "mcpServers": {
+    "vertex-ai-search": {
+      "serverUrl": "https://discoveryengine.googleapis.com/mcp",
+      "authProviderType": "google_credentials"
+    },
+    "google-cloud-apikeys": {
+      "serverUrl": "https://apikeys.googleapis.com/mcp",
+      "authProviderType": "google_credentials"
+    },
+    "canva": {
+      "command": "node",
+      "args": [
+        "/Users/admin/.gemini/config/plugins/canva/server.js"
+      ]
+    },
+    "flux-image-gen": {
+      "command": "node",
+      "args": [
+        "/Users/admin/.gemini/config/plugins/flux-image-gen/server.js"
+      ]
+    },
+    "blender-mcp": {
+      "command": "node",
+      "args": [
+        "/Users/admin/.gemini/config/plugins/blender-mcp/server.js"
+      ]
+    },
+    "instagram": {
+      "command": "node",
+      "args": [
+        "/Users/admin/.gemini/config/plugins/instagram/server.js"
+      ]
+    },
+    "google-flow": {
+      "command": "node",
+      "args": [
+        "/Users/admin/.gemini/config/plugins/google-flow/dist/index.js"
+      ],
+      "env": {
+        "GOOGLE_FLOW_CDP_URL": "http://127.0.0.1:9222",
+        "GOOGLE_FLOW_DOWNLOAD_DIR": "/Users/admin/Downloads",
+        "GOOGLE_FLOW_HEADLESS": "true"
+      }
+    },
+    "whatsapp": {
+      "command": "node",
+      "args": [
+        "/Users/admin/.gemini/config/plugins/whatsapp/server.js"
+      ]
+    },
+    "magnific": {
+      "command": "node",
+      "args": [
+        "/Users/admin/.gemini/config/plugins/magnific/server.js"
+      ],
+      "env": {
+        "MAGNIFIC_API_KEY": "YOUR_MAGNIFIC_API_KEY_HERE",
+        "MAGNIFIC_DOWNLOAD_DIR": "/Users/admin/Downloads"
+      }
+    },
+    "rea": {
+      "command": "/Users/admin/.gemini/antigravity/bin/rea",
+      "args": [
+        "mcp"
+      ]
+    }
+  }
+}

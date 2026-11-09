@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "instagram": {
+      "command": "node",
+      "args": [
+        "/Users/admin/.gemini/config/plugins/instagram/server.js"
+      ]
+    }
+  }
+}

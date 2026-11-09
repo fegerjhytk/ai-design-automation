@@ -1,0 +1,12 @@
+{
+  "name": "google-flow",
+  "displayName": "Google Flow (Veo & Imagen)",
+  "version": "1.0.0",
+  "description": "Model Context Protocol server for Google Flow (flow.google) enabling AI generation of cinematic Veo videos, Imagen images, reference animation, and local media downloading.",
+  "suggestedPrompts": [
+    "Generate a cinematic video of a spaceship entering hyperspace with Google Flow",
+    "Create a photorealistic cyberpunk street image with Google Flow",
+    "Animate this portrait with camera zooming in using Google Flow",
+    "Check my Google Flow account credits and project status"
+  ]
+}
