@@ -13,7 +13,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const API_KEY = process.env.GEMINI_API_KEY || "YOUR_GEMINI_API_KEY";
+const API_KEY = process.env.GEMINI_API_KEY || "";
 
 // 1. Text Copywriting (100% Free Tier via Google AI Studio)
 async function generateCopy(prompt) {
@@ -111,36 +111,47 @@ async function routeImageGeneration(options = {}) {
 
 // 4. Video Generation & Motion (Google Flow PRO or Local After Effects 2026 Engine)
 async function routeVideoGeneration(options = {}) {
-  const engine = options.engine || (options.local ? 'after-effects' : 'after-effects'); // Defaults to zero-cost local AE
+  const engine = options.engine || (options.local ? 'after-effects' : 'google-flow-pro');
   const prompt = options.prompt || 'Cinematic slow drone reveal of modern villa, golden hour illumination';
   const aspectRatio = options.aspectRatio || '16:9';
-  const duration = options.duration || '10s';
-  const model = options.model || (engine === 'after-effects' ? 'After Effects 2026 ExtendScript Engine' : 'Omni 1.2 Flash');
+  const duration = options.duration || '15s';
+  const model = options.model || (engine === 'after-effects' ? 'After Effects 2026 Motion Suite' : 'Omni 1.2 Flash');
 
   console.log(`[Multimodal Router] Routing motion/video request to ${engine.toUpperCase()} (${model})...`);
   console.log(`  + Engine: ${engine}`);
   console.log(`  + Aspect Ratio: ${aspectRatio}`);
   console.log(`  + Duration: ${duration}`);
-  console.log(`  + Cost: $0.00 (Local AE Native Engine / Zero API Cost)`);
+
+  if (engine === 'google-flow-pro') {
+    return {
+      success: true,
+      modality: 'video',
+      engine: 'google-flow-pro',
+      model: 'Omni 1.2 Flash',
+      cost: '$0.00 (PRO Membership Credits)',
+      aspectRatio: aspectRatio,
+      duration: duration,
+      prompt: prompt,
+      instructions: 'Use Google Flow MCP flow_generate_video or flow_animate_image. Always prompt user for aspect ratio (16:9 or 9:16).'
+    };
+  }
 
   return {
     success: true,
     modality: 'video',
-    engine: engine,
+    engine: 'after-effects',
     model: model,
     cost: '$0.00 (Zero API cost - Local Native Engine)',
     aspectRatio: aspectRatio,
     duration: duration,
     prompt: prompt,
-    instructions: engine === 'after-effects' 
-      ? 'Use after_effects_motion_controller.js with puppet, promo, or zigma commercial animation.'
-      : 'Use Google Flow MCP flow_generate_video or flow_animate_image.'
+    instructions: 'Use ai_video_controller.js or after_effects_motion_controller.js with motion-clone, comp-to-gif, puppet, or zigma animation.'
   };
 }
 
 // 5. Local After Effects Automation Router
 async function routeAfterEffectsMotion(options = {}) {
-  const mode = options.mode || 'puppet'; // 'puppet', 'promo', 'product', 'buoyancy'
+  const mode = options.mode || 'motion-clone'; // 'motion-clone', 'comp-to-gif', 'puppet', 'promo', 'product', 'buoyancy'
   const { checkAfterEffectsHealth } = require('./after_effects_motion_controller');
   const health = checkAfterEffectsHealth();
 

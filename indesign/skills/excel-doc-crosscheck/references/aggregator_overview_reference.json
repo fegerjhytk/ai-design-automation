@@ -1,0 +1,821 @@
+[
+  {
+    "row": 10,
+    "feature_en": "CUSTOMER IDENTIFICATION DETAILS",
+    "translation_fr": "DONNÉES D'IDENTIFICATION DU CLIENT",
+    "comment_fr": "",
+    "comment_en": ""
+  },
+  {
+    "row": 11,
+    "feature_en": "Add Flying Blue details",
+    "translation_fr": "Ajouter les informations Flying Blue",
+    "comment_fr": "Ajoutez le numéro de la carte Flying Blue pour recevoir des offres personnalisées. Les offres personnalisées ne sont disponibles que si les données Flying Blue sont saisies.",
+    "comment_en": "Flying Blue card number can be entered to receive personalized offers. Personalized offers are only available if Flying Blue details are entered."
+  },
+  {
+    "row": 12,
+    "feature_en": "Add other frequent flyer program details",
+    "translation_fr": "Ajouter les informations d'autres programmes de fidélisation",
+    "comment_fr": "Les détails des programmes de fidélisation d’autres compagnies aériennes peuvent être saisis.",
+    "comment_en": "Frequent flyer program details of other airlines can be entered."
+  },
+  {
+    "row": 13,
+    "feature_en": "Name correction",
+    "translation_fr": "Correction de nom",
+    "comment_fr": "Corrigez le nom du client.",
+    "comment_en": "Make a correction to the customer’s name."
+  },
+  {
+    "row": 14,
+    "feature_en": "Name change (corporate agreement only)",
+    "translation_fr": "Changement de nom (entreprise avec accord commercial uniquement)",
+    "comment_fr": "Modifiez le nom du client (uniquement pour les entreprises sous contrat).",
+    "comment_en": "Change the customer’s name (for contracted corporate only)."
+  },
+  {
+    "row": 15,
+    "feature_en": "Customer contact details denied (SSR CTCR)",
+    "translation_fr": "Coordonnées du client refusées (SSR CTCR)",
+    "comment_fr": "Information sur le refus du client de fournir ses coordonnées.",
+    "comment_en": "Information about the customer's refusal to provide contact details"
+  },
+  {
+    "row": 16,
+    "feature_en": "Change customer contact details",
+    "translation_fr": "Modification des coordonnées client",
+    "comment_fr": "Modifiez les coordonnées du client.",
+    "comment_en": "Change the customer’s contact details."
+  },
+  {
+    "row": 17,
+    "feature_en": "Link child/infant with referent adult",
+    "translation_fr": "Lien entre l'enfant/le nourrisson et l'adulte",
+    "comment_fr": "Établir un lien entre l’enfant/le nourrisson et l’adulte référent.",
+    "comment_en": "Link a child’s or infant’s information to the referent adult. \nTo be removed as it was a limitation"
+  },
+  {
+    "row": 18,
+    "feature_en": "Corporate recognition",
+    "translation_fr": "Reconnaissance Corporate",
+    "comment_fr": "Reconnaissance des entreprises sur la base d’un numéro d’identification\nd’entreprise (OIN) valide, en veillant à ce que le programme Corporate Benefits soit\nappliqué.\n\nConsultez votre agrégateur NDC pour savoir comment saisir et transmettre les\ninformations nécessaires.\n\nPour les contrats NAM locaux, veuillez utiliser le ticket designator au lieu de l’OIN.",
+    "comment_en": "Recognition of corporates based on a valid Corporate ID (OIN), ensuring that the related Corporate Benefits Program is applied. \n\nConsult your NDC aggregator to learn how to capture and forward the necessary information. \n\nFor local NAM contracts, please use the ticket designator instead of the OIN."
+  },
+  {
+    "row": 19,
+    "feature_en": "Customer TAX ID (South America)",
+    "translation_fr": "Identification fiscale du client (Amérique du sud)",
+    "comment_fr": "Identification de la référence fiscale du client pour les pays d’Amérique du sud",
+    "comment_en": "Identification of the customer TAX ID for South American countries"
+  },
+  {
+    "row": 20,
+    "feature_en": "TIDS for non-IATA travel agencies",
+    "translation_fr": "TIDS pour agences de voyages non-IATA",
+    "comment_fr": "Possibilité d’identifier les agences de voyages non-IATA via un code TIDS",
+    "comment_en": "Possibility to identify non-IATA travel agencies via a TIDS code"
+  },
+  {
+    "row": 22,
+    "feature_en": "APIS",
+    "translation_fr": "APIS",
+    "comment_fr": "",
+    "comment_en": ""
+  },
+  {
+    "row": 23,
+    "feature_en": "Secure Flight indicator",
+    "translation_fr": "Indicateur Secure Flight",
+    "comment_fr": "Indicateur de vol identifié APIS, garantissant la conformité avec les mesures de sécurité et les réglementations.",
+    "comment_en": "Indicator that the flight has been identified for the APIS, ensuring compliance with security measures and regulations"
+  },
+  {
+    "row": 24,
+    "feature_en": "Add APIS details",
+    "translation_fr": "Ajouter les informations APIS",
+    "comment_fr": "Les détails APIS peuvent être ajoutés pendant le shopping ou ajoutés/modifiés après la commande.",
+    "comment_en": "APIS details can be added during shopping or added/modified after ordering."
+  },
+  {
+    "row": 26,
+    "feature_en": "SHOPPING SEARCH CRITERIA",
+    "translation_fr": "CRITÈRES DE RECHERCHE",
+    "comment_fr": "",
+    "comment_en": ""
+  },
+  {
+    "row": 27,
+    "feature_en": "Search in time window",
+    "translation_fr": "Recherche dans une fenêtre temporelle",
+    "comment_fr": "Recherchez des vols dans une fenêtre horaire d’arrivée ou de départ spécifique.",
+    "comment_en": "Search for flights within a specific arrival or departure time window."
+  },
+  {
+    "row": 28,
+    "feature_en": "Search by modifiable and/or refundable offer",
+    "translation_fr": "Recherche par offre modifiable et/ou remboursable",
+    "comment_fr": "Recherchez des offres uniquement modifiables et/ou remboursables.",
+    "comment_en": "Search for modifiable and/or refundable offers only."
+  },
+  {
+    "row": 29,
+    "feature_en": "Search by cabin or fare option",
+    "translation_fr": "Recherche par cabine ou option tarifaire",
+    "comment_fr": "Recherchez par cabine ou option tarifaire spécifique.",
+    "comment_en": "Search for a particular cabin or fare option."
+  },
+  {
+    "row": 30,
+    "feature_en": "Search by lowest fare or without mixed fares",
+    "translation_fr": "Recherche par tarif le plus bas ou sans combinaison d’options tarifaires",
+    "comment_fr": "Recherchez le tarif le plus bas disponible ou optez pour une recherche sans combinaison d’options tarifaires.",
+    "comment_en": "Search for the lowest available fare or opt for a search without different fare options."
+  },
+  {
+    "row": 31,
+    "feature_en": "Search with maximum number of offers",
+    "translation_fr": "Recherche avec un nombre maximum d’offres",
+    "comment_fr": "Recherchez avec une limite spécifique sur le nombre d’offres proposées, par exemple un maximum de 10 offres.",
+    "comment_en": "Search with a specific limit on the number of offers displayed, such as a maximum of 10 offers."
+  },
+  {
+    "row": 32,
+    "feature_en": "Search by direct flights",
+    "translation_fr": "Recherche de vols directs",
+    "comment_fr": "Recherchez uniquement des offres avec vols directs.",
+    "comment_en": "Search for direct flights only."
+  },
+  {
+    "row": 33,
+    "feature_en": "Search by only AF and KL operated flights",
+    "translation_fr": "Recherche d’offres de vols opérés par Air France ou KLM uniquement",
+    "comment_fr": "Recherchez uniquement des offres de vols opérés par Air France ou KLM.",
+    "comment_en": "Search for flights only operated by Air France or KLM."
+  },
+  {
+    "row": 34,
+    "feature_en": "Search by flight number",
+    "translation_fr": "Recherche par numéro de vol",
+    "comment_fr": "Recherchez des offres pour un numéro de vol spécifique.",
+    "comment_en": "Search for a specific flight number."
+  },
+  {
+    "row": 35,
+    "feature_en": "Get extra fare options after initial search (upsell)",
+    "translation_fr": "Obtenir d'autres options tarifaires après la recherche initiale (upsell)",
+    "comment_fr": "Accédez à une gamme d’offres supérieures, y compris différentes options tarifaires par cabine.",
+    "comment_en": "Access a range of offers, including different fare options per cabin."
+  },
+  {
+    "row": 37,
+    "feature_en": "TYPES OF FARES AND TRIPS",
+    "translation_fr": "TYPES DE TARIFS ET DE VOYAGES",
+    "comment_fr": "",
+    "comment_en": ""
+  },
+  {
+    "row": 38,
+    "feature_en": "Public fares for adult, child and infant",
+    "translation_fr": "Tarifs publics pour adulte, enfant et nourrisson",
+    "comment_fr": "Accédez à des tarifs publics pour adulte, enfant et nourrisson via PTC (Passenger Type Codes). Les PTC sont obligatoires et sont les mêmes que ceux utilisés en GDS EDIFACT (ADT, INF, ou CHD inclus).",
+    "comment_en": "Access to public fares via PTCs (Passenger Type Codes) for adult, child, and infant passengers. PTCs are mandatory and the same as those used via GDS EDIFACT, including ADT, INF, or CHD."
+  },
+  {
+    "row": 39,
+    "feature_en": "Public fares for youth and senior",
+    "translation_fr": "Tarifs publics jeune ou senior",
+    "comment_fr": "Accédez à des tarifs publics jeune ou senior via PTC (Passenger Type Codes). Les PTC sont obligatoires et sont les mêmes que ceux utilisés en GDS EDIFACT : YTH pour jeune et YCD pour senior. Les cartes Jeune et Senior peuvent être achetées uniquement sur le site www.airfrance.fr.",
+    "comment_en": "Access to public fares via PTCs (Passenger Type Codes) for youth and senior passengers. PTCs are mandatory and the same as those used via GDS EDIFACT, including YTH for youth and YCD for senior passengers. The Youth Pass and Senior Pass can only be purchased through the website www.airfrance.fr."
+  },
+  {
+    "row": 40,
+    "feature_en": "Seaman and energy fares",
+    "translation_fr": "Tarifs marin et energie",
+    "comment_fr": "Les tarifs Marins ou Energie ne nécessitent pas d’«account code», mais des PTC identiques à ceux utilisés dans les GDS/EDIFACT.\n\nDes informations complémentaires, telles que le nom du navire ou le nom et l'emplacement de l'éolienne, sont requises.\n\nConsultez votre agrégateur NDC pour savoir comment accéder à ces tarifs via votre plateforme de réservation NDC.",
+    "comment_en": "Access to Seaman or Energy fares does not require an account code, but specific PTCs that are identical to the ones used in GDS/EDIFACT.\n\nAdditional information, such as vessel name or windmill name and location, for instance, is required.\n\nConsult your NDC aggregator to learn how to access these fares via your NDC booking platform."
+  },
+  {
+    "row": 41,
+    "feature_en": "One-way and round-trips",
+    "translation_fr": "Vols allers-simples et allers-retours",
+    "comment_fr": "Réservez des offres de vols allers-simples ou allers-retours avec un nombre maximum de 3 segments en connexion",
+    "comment_en": "Book one-way and round-trip flights with a maximum of 3 segments in connection, per direction"
+  },
+  {
+    "row": 42,
+    "feature_en": "Open-jaw",
+    "translation_fr": "Open-jaw",
+    "comment_fr": "Réservez un open-jaw avec un nombre maximum de 3 segments en connexion, par direction",
+    "comment_en": "Book an open-jaw itinerary with a maximum of 3 segments in connection, per direction."
+  },
+  {
+    "row": 43,
+    "feature_en": "Multi-city",
+    "translation_fr": "Destinations multiples",
+    "comment_fr": "Réservez des voyages dans plusieurs villes (jusqu’à 4 segments). Vous pouvez facilement rechercher et sélectionner des vols pour plusieurs destinations et créer un itinéraire personnalisé comprenant plusieurs arrêts.",
+    "comment_en": ""
+  },
+  {
+    "row": 44,
+    "feature_en": "Corporate negotiated fares (excluding departures from US, MX and CA)",
+    "translation_fr": "Tarifs négociés entreprises\n(à l’exclusion des départs US, MX et CA)",
+    "comment_fr": "Accédez aux tarifs négociés entreprises sur la base d’un identifiant Corporate valide. L’identifiant Corporate est celui utilisé en GDS EDIFACT (ex : OINxxxxxx en Amadeus). Ce n’est pas l’account code utilisé en GDS EDIFACT (ex : R,Uxxxxx en Amadeus). Consultez votre agrégateur NDC pour savoir comment saisir et transmettre les informations nécessaires.",
+    "comment_en": "Access corporate negotiated fares based on a valid Corporate ID.\n\nThe Corporate ID is the same as the one used via GDS EDIFACT (e.g. OINxxxxxx in Amadeus). It is not the account code used in GDS EDIFACT (e.g. R,Uxxxxx in Amadeus). \n\nConsult your NDC aggregator to learn how to capture and forward the necessary information."
+  },
+  {
+    "row": 45,
+    "feature_en": "Corporate negotiated fares triggered by a ticket designator (departures from US, MX and CA) for local contracts",
+    "translation_fr": "Tarifs négociés entreprises avec \"ticket designator\" (départs US, MX et CA) pour les contrats locaux",
+    "comment_fr": "Accédez aux tarifs négociés entreprises sur la base d’un «ticket designator» valide pour les contrats locaux avec départs US, MX et CA.\n\nLe «ticket designator»  est celui utilisé en GDS EDIFACT. Il ne s'agit ni du code compte utilisé dans le GDS EDIFACT (par ex. R,Uxxxxx dans Amadeus) ni de l'OIN, également utilisé dans le GDS EDIFACT pour assurer le suivi de la réservation et fournir des services liés au « Corporate Benefit Program ».\n\nConsultez votre agrégateur NDC pour savoir comment saisir et transmettre les informations nécessaires.",
+    "comment_en": "Access corporate negotiated fares based on a valid Ticket Designator.\n\nThe Ticket Designator is the same as the one used via GDS EDIFACT. \n\nIt is not the account code used in GDS EDIFACT (e.g. R,Uxxxxx in Amadeus) nor the OIN also used in GDS EDIFACT to trace the booking and provide services related to the «Corporate Benefit Program»\n\nConsult your NDC aggregator to learn how to capture and forward the necessary information."
+  },
+  {
+    "row": 46,
+    "feature_en": "Discount Pass fares",
+    "translation_fr": "Tarifs Abonnés",
+    "comment_fr": "Accédez aux tarifs abonnés quand le numéro de la carte d’abonnement est inséré. Le PTC (Passenger Type Code) “ADT” est requis. Consultez l’espace sécurisé de Business Solutions pour créer ou renouveler les cartes d’abonnement, pour une sélection de marchés. Consultez votre agrégateur NDC pour savoir comment saisir et transmettre les informations nécessaires.",
+    "comment_en": "Access to subscription fares when a subscriber card number is provided. The PTC (Passenger Type Code) “ADT” is mandatory for this feature. \n\nConsult the secured area of Business Solutions to complete the subscription for selected markets and to renew Discount Passes.\n\nConsult your NDC aggregator to learn how to capture and forward the necessary information."
+  },
+  {
+    "row": 47,
+    "feature_en": "Private fares without account code",
+    "translation_fr": "Tarifs privés sans “account code”",
+    "comment_fr": "Accédez aux tarifs privés ne nécessitant pas un «account code». \n\nConsultez votre agrégateur pour savoir comment accéder à vos tarifs privés via votre plateforme de réservation NDC.",
+    "comment_en": "Access private fares which does not require an account code. \n\nConsult your NDC aggregator to learn how to access it via your NDC booking platform."
+  },
+  {
+    "row": 48,
+    "feature_en": "Private fares with account code",
+    "translation_fr": "Tarifs privés avec “account code”",
+    "comment_fr": "Certains tarifs privés sont uniquement accessibles avec un « account code » dédié.\n\nL’« account code » est identique à celui utilisé en GDS EDIFACT. \n\nConsultez votre agrégateur pour savoir accéder à vos tarif privés via votre plateforme de réservation NDC.",
+    "comment_en": "Certain private fares are only accessible with a dedicated account code. The account code is the same as the one used via GDS EDIFACT. \n\nConsult your NDC aggregator to learn how to access it via your NDC booking platform."
+  },
+  {
+    "row": 49,
+    "feature_en": "Combination of a negotiated corporate fare with a public fare",
+    "translation_fr": "Combinaison d’un tarif négocié entreprise avec un tarif public",
+    "comment_fr": "Réservez un itinéraire combinant, sur l’un des parcours, un tarif négocié entreprise, avec un tarif public sur l’autre parcours.",
+    "comment_en": "Book a travel itinerary that combines a negotiated corporate fare for one leg of the journey with a public fare for the other leg."
+  },
+  {
+    "row": 50,
+    "feature_en": "Interline connections with partner airlines",
+    "translation_fr": "Interline avec des compagnies aériennes partenaires",
+    "comment_fr": "Réservez, via notre solution NDC, des vols commercialisés par des partenaires en combinaison avec des vols Air France et KLM. Cela inclut les vols commercialisés par Delta en combinaison avec des vols transatlantiques Air France et KLM, ainsi que les vols commercialisés par SAS sur son réseau européen en continuité d'un vol Air France ou KLM.",
+    "comment_en": "Book selected partner-marketed flights in combination with Air France and KLM flights directly through NDC. This includes Delta-marketed flights in combination with Air France and KLM transatlantic flights, as well as flights marketed by SAS across its European network when connecting to/from an Air France or KLM flight."
+  },
+  {
+    "row": 51,
+    "feature_en": "Book different cabins for each direction",
+    "translation_fr": "Réserver des cabines différentes par trajet",
+    "comment_fr": "Sélectionner une cabine différente pour l’aller et le retour.",
+    "comment_en": "Select a different cabin for each direction."
+  },
+  {
+    "row": 53,
+    "feature_en": "EXTRA OPTIONS",
+    "translation_fr": "OPTIONS SUPPLEMENTAIRES",
+    "comment_fr": "",
+    "comment_en": ""
+  },
+  {
+    "row": 54,
+    "feature_en": "Seat as an extra option",
+    "translation_fr": "Option supplémentaire de siège",
+    "comment_fr": "Ajoutez une option supplémentaire de siège à votre réservation. Le niveau de la carte Flying Blue et le « Corporate Benefits Program » sont pris en compte (si applicable). La tarification dynamique de l’option supplémentaire de siège est toujours égale ou meilleur marché, comparativement aux ventes GDS EDIFACT.",
+    "comment_en": "Add a seat as an extra option to your booking. The Flying Blue Tier level and Corporate Benefit Program are taken into consideration (if applicable). The dynamically priced seat options are always equal or cheaper compared to sales via GDS EDIFACT"
+  },
+  {
+    "row": 55,
+    "feature_en": "Baggage as an extra option",
+    "translation_fr": "Option de bagage supplémentaire",
+    "comment_fr": "Ajoutez une option de bagage supplémentaire. Le niveau de carte Flying Blue ainsi que le programme» Corporate Benefi ts» sont pris en compte (si applicable)",
+    "comment_en": "Add baggage as an extra option. The Flying Blue Tier level and Corporate Benefit Program are taken into consideration (if applicable)."
+  },
+  {
+    "row": 56,
+    "feature_en": "Lounge access as an extra option",
+    "translation_fr": "Option supplémentaire d’accès salon",
+    "comment_fr": "Ajoutez une option supplémentaire d’accès salon à votre réservation.",
+    "comment_en": "Add lounge access as an extra options to your booking."
+  },
+  {
+    "row": 57,
+    "feature_en": "SAF* as an extra option",
+    "translation_fr": "Option supplémentaire SAF*",
+    "comment_fr": "Ajoutez une option supplémentaire SAF.",
+    "comment_en": "Add SAF as an extra option."
+  },
+  {
+    "row": 58,
+    "feature_en": "Hand baggage as an extra option for the Basic fare option",
+    "translation_fr": "Option supplémentaire de bagage à main pour tarif Basic",
+    "comment_fr": "Ajoutez une option supplémentaire de bagage à main pour l’option tarifaire Basic. Le niveau de carte Flying Blue ainsi que le programme» Corporate Benefits» sont pris en compte (si applicable).",
+    "comment_en": "Add hand baggage as an extra option for the Basic fare option. The Flying Blue tier level is taken into consideration (if applicable)."
+  },
+  {
+    "row": 60,
+    "feature_en": "BUNDLES",
+    "translation_fr": "OFFRES GROUPEES DYNAMIQUES (BUNDLES)",
+    "comment_fr": "",
+    "comment_en": ""
+  },
+  {
+    "row": 61,
+    "feature_en": "Dynamic seat bundle",
+    "translation_fr": "Offre groupée de siège dynamique",
+    "comment_fr": "Réservez une offre groupée de siège dynamique, combinant un billet et une option de siège payante dans une unique offre. Cette offre groupée (Light Plus or Standard Plus est toujours proposée à un meilleur tarif, comparé à une vente séparée d’option de siège payante.",
+    "comment_en": "Book a dynamically priced seat bundle, which combines a ticket and paid seat option in a single offer. This bundle (Light Plus or Standard Plus) is always offered at a cheaper price compared to a separate paid seat option."
+  },
+  {
+    "row": 62,
+    "feature_en": "Dynamic public Extra SAF* bundle",
+    "translation_fr": "Offre groupée « Extra SAF* » dynamique",
+    "comment_fr": "Réservez une offre groupée dynamique contribuant à l’achat supplémentaire de carburant durable.",
+    "comment_en": "Book a dynamically priced Sustainable Aviation Fuel bundle."
+  },
+  {
+    "row": 63,
+    "feature_en": "Dynamic corporate Extra SAF* bundle",
+    "translation_fr": "Offre groupée « Extra SAF* » dynamique pour les entreprises",
+    "comment_fr": "Réservez une offre groupée dynamique contribuant à l’achat supplémentaire de carburant durable, pour les entreprises sous contrat SAF.",
+    "comment_en": "Book a dynamically priced Sustainable Aviation Fuel bundle tailor-made for SAF contracted corporates."
+  },
+  {
+    "row": 65,
+    "feature_en": "SHOPPING DETAILS",
+    "translation_fr": "DETAILS DU SHOPPING",
+    "comment_fr": "",
+    "comment_en": ""
+  },
+  {
+    "row": 66,
+    "feature_en": "Different fare options per bound",
+    "translation_fr": "Différentes options tarifaires par direction",
+    "comment_fr": "Choisissez parmi différentes options tarifaires pour chacune des directions du voyage.",
+    "comment_en": "Choose from a range of fare options for each leg of the journey."
+  },
+  {
+    "row": 67,
+    "feature_en": "Simplified fare conditions per bound",
+    "translation_fr": "Conditions tarifaires simplifiées par direction",
+    "comment_fr": "Une description claire et simplifiée des conditions du tarif.",
+    "comment_en": "Simplified and clear description of fare conditions."
+  },
+  {
+    "row": 68,
+    "feature_en": "Flight amenities",
+    "translation_fr": "Aménagements du vol",
+    "comment_fr": "Description des équipements de vol, y compris la disposition des sièges, la disponibilité des berceaux, les ports USB, les options de divertissement à bord, les prises de courant, les sièges inclinables, les repas et les collations proposés, la disponibilité de la presse et l’accès au Wi-Fi.",
+    "comment_en": "Description of flight amenities, including seat layout, bassinet availability, USB ports, in-flight entertainment options, power outlets, recliner seats, meal and snack offerings, press availability, and Wi-Fi access."
+  },
+  {
+    "row": 69,
+    "feature_en": "Baggage",
+    "translation_fr": "Bagage",
+    "comment_fr": "Informations sur les franchises de bagages, y compris le nombre maximum de pièces, la taille et le poids des bagages à main et des bagages enregistrés. Le niveau Flying Blue est pris en compte (le cas échéant).",
+    "comment_en": "Information about baggage allowances, including the maximum number of pieces, size and weight for both hand baggage and checked baggage. The Flying Blue Tier level is taken into consideration (if applicable)"
+  },
+  {
+    "row": 70,
+    "feature_en": "Flying Blue mileage accrual",
+    "translation_fr": "Accumulation de miles Flying Blue",
+    "comment_fr": "Information sur le nombre de miles Flying Blue liés à une offre spécifique",
+    "comment_en": "Information on the number of Flying Blue miles earned through a specific offer."
+  },
+  {
+    "row": 71,
+    "feature_en": "Payment time limit (TTL)",
+    "translation_fr": "Date limite d’émission la plus restrictive (TTL)",
+    "comment_fr": "Indication de la date et de l’heure limites auxquelles le billet ou l’option doivent être émis.",
+    "comment_en": "Indicating the latest date and time by which the flight or ancillary must be issued."
+  },
+  {
+    "row": 73,
+    "feature_en": "SPECIAL SERVICE REQUESTS",
+    "translation_fr": "DEMANDES DE SERVICES SPECIAUX",
+    "comment_fr": "",
+    "comment_en": ""
+  },
+  {
+    "row": 74,
+    "feature_en": "Free special meal",
+    "translation_fr": "Repas special gratuit",
+    "comment_fr": "Ajoutez une demande à votre réservation pour l’un des différents repas spéciaux gratuits d’Air France et de KLM. Cela comprend la présélection du plat principal à bord des vols opérés par AF, en cabine Business.",
+    "comment_en": "Add a request to you booking for one of the various Air France and KLM free special meals"
+  },
+  {
+    "row": 75,
+    "feature_en": "Customer with disability (BLND/DEAF)",
+    "translation_fr": "Client en situation de handicap (BLND/DEAF)",
+    "comment_fr": "Identifiez votre demande de réservation pour un client malvoyant/aveugle, ou un client sourd ou malentendant.",
+    "comment_en": "Add a request to book for a visually impaired/blind customer, or a deaf or hard of hearing customer."
+  },
+  {
+    "row": 76,
+    "feature_en": "Wheelchairs (WCHR/WCHS)",
+    "translation_fr": "Fauteuils roulants (WCHR/WCHS)",
+    "comment_fr": "Ajoutez une demande pour un service de fauteuil roulant ou de minicar (WCHR ou WCHS uniquement).",
+    "comment_en": "Add a request for a wheelchair or minicar service (WCHR or WCHS only)"
+  },
+  {
+    "row": 77,
+    "feature_en": "Regular meal pre-selection in Business cabin (AF operated flights only)",
+    "translation_fr": "Présélection des repas en cabine Business (vols opérés par AF uniquement)",
+    "comment_fr": "Pré-commandez le plat principal à bord des vols opérés par AF, en cabine Business.",
+    "comment_en": "Pre-select regular meals in the Business cabin on AF operated flights."
+  },
+  {
+    "row": 79,
+    "feature_en": "PAYMENT",
+    "translation_fr": "PAIEMENT",
+    "comment_fr": "",
+    "comment_en": ""
+  },
+  {
+    "row": 80,
+    "feature_en": "Delayed issuance based on payment time limit",
+    "translation_fr": "Paiement différé sur la base de la date limite (TTL)",
+    "comment_fr": "Placez votre commande en attente jusqu’à la date limite d’émission (TTL) et émettez la avant la fin du délai.",
+    "comment_en": "Put your order on hold until the payment time limit (TTL) and issue it before the deadline."
+  },
+  {
+    "row": 81,
+    "feature_en": "Cash payment",
+    "translation_fr": "Paiement cash",
+    "comment_fr": "Payez «Cash» via BSP ou ARC",
+    "comment_en": "Cash payment via BSP or ARC"
+  },
+  {
+    "row": 82,
+    "feature_en": "ARC",
+    "translation_fr": "ARC",
+    "comment_fr": "Payez via ARC “cash”.",
+    "comment_en": "Payment via ARC “cash”."
+  },
+  {
+    "row": 83,
+    "feature_en": "Payment cards",
+    "translation_fr": "Cartes de paiement",
+    "comment_fr": "Payez avec des cartes de paiement.",
+    "comment_en": "Payment via various payment cards."
+  },
+  {
+    "row": 84,
+    "feature_en": "Payment card fees",
+    "translation_fr": "Surcharge carte de paiement",
+    "comment_fr": "Information sur le montant de la surcharge carte.",
+    "comment_en": "Payment card transaction fees."
+  },
+  {
+    "row": 85,
+    "feature_en": "3-D Secure",
+    "translation_fr": "3-D Secure",
+    "comment_fr": "Processus 3-D Secure.",
+    "comment_en": "3DSecure process."
+  },
+  {
+    "row": 86,
+    "feature_en": "IATA EASY PAY",
+    "translation_fr": "IATA EASY PAY",
+    "comment_fr": "Payez avec IATA EASY PAY.",
+    "comment_en": "Payment via IATA EASY PAY (IEP)."
+  },
+  {
+    "row": 87,
+    "feature_en": "Virtual payment cards",
+    "translation_fr": "Cartes de paiement virtuelles",
+    "comment_fr": "Les cartes de paiement virtuelles sont supportées.",
+    "comment_en": "Virtual payment cards are supported."
+  },
+  {
+    "row": 88,
+    "feature_en": "Voucher (EMD)",
+    "translation_fr": "Bons (EMD)",
+    "comment_fr": "Les bons (EMD) sont acceptés comme forme de paiement.",
+    "comment_en": "Vouchers (EMDs) are supported as form of payment."
+  },
+  {
+    "row": 89,
+    "feature_en": "Lodge cards",
+    "translation_fr": "Cartes logées",
+    "comment_fr": "Payez avec une carte logée.",
+    "comment_en": "Payment via lodge cards."
+  },
+  {
+    "row": 90,
+    "feature_en": "Payment by card in installments (Brazil)",
+    "translation_fr": "Paiement par carte avec versements échelonnés (Brésil)",
+    "comment_fr": "Payez en plusieurs fois par carte au Brésil.",
+    "comment_en": "Pay with installments by card in Brazil."
+  },
+  {
+    "row": 92,
+    "feature_en": "SERVICING",
+    "translation_fr": "SERVICES APRES-VENTE",
+    "comment_fr": "",
+    "comment_en": ""
+  },
+  {
+    "row": 93,
+    "feature_en": "Cancel flight segment before manual refund",
+    "translation_fr": "Annulation des segments de vol avant remboursement manuel",
+    "comment_fr": "Si un remboursement automatique n’est pas possible, vous devrez annuler les segments de vol avant de demander un remboursement manuel.",
+    "comment_en": "If an automatic refund is not possible, you will need to cancel the flight segments before requesting a manual refund."
+  },
+  {
+    "row": 94,
+    "feature_en": "Voluntary rebooking before payment",
+    "translation_fr": "Modification volontaire de réservation avant paiement",
+    "comment_fr": "Modifiez le vol avant paiement, sous réserve de certaines limitations. Pour plus d’information consultez le document NDC en self-service.",
+    "comment_en": "Rebook a flight before payment, subject to certain limitations. Refer to the self servicing document for more information."
+  },
+  {
+    "row": 95,
+    "feature_en": "Voluntary rebooking after payment",
+    "translation_fr": "Modification volontaire de réservation après paiement",
+    "comment_fr": "Modifiez le vol après paiement, sous réserve de certaines limitations. Pour plus d’information consultez le document NDC en self-service.",
+    "comment_en": "Rebook a flight after payment, subject to certain limitations. Refer to the self servicing document for more information."
+  },
+  {
+    "row": 96,
+    "feature_en": "Voluntary rebooking including seat and bag",
+    "translation_fr": "Modification d'une réservation avec option siège ou bagage",
+    "comment_fr": "Modifier la réservation d’un vol incluant un siège et/ou un bagage en option",
+    "comment_en": "Rebook a flight including seat and/or bag as an extra option"
+  },
+  {
+    "row": 97,
+    "feature_en": "Voluntary rebooking after departure",
+    "translation_fr": "Modification volontaire de réservation après départ",
+    "comment_fr": "Modifiez le vol après départ, sous réserve de certaines limitations. Pour plus d’information consultez le document NDC en self-service.",
+    "comment_en": "Rebook a flight after departure, subject to certain limitations. Refer to the self servicing document for more information."
+  },
+  {
+    "row": 98,
+    "feature_en": "Voluntary refund",
+    "translation_fr": "Remboursement volontaire",
+    "comment_fr": "Effectuez un remboursement volontaire automatique, sous réserve de certaines limitations. Pour plus d’information consultez le document NDC en self-service.",
+    "comment_en": "Receive an automatic voluntary refund, subject to certain limitations. Refer to the self servicing document for more information."
+  },
+  {
+    "row": 99,
+    "feature_en": "Rebooking option after disruption",
+    "translation_fr": "Option de rebooking après une irrégularité",
+    "comment_fr": "Une notification par courrier électronique est envoyée à l’agence de voyage en cas de perturbation en dehors de la fenêtre d’enregistrement (30 heures avant le départ).",
+    "comment_en": "Change the proposed rebooking after disruption. Refer to the self servicing document for more information."
+  },
+  {
+    "row": 100,
+    "feature_en": "Order change notification (OCN)",
+    "translation_fr": "Notification de modification de l’Order (OCN)",
+    "comment_fr": "Un “Order Change Notification” (OCN) est envoyé en cas d’annulation de vol ou de changements autres sur la commande (Order).",
+    "comment_en": "An Order Change Notification (OCN) is sent in case of flight cancellation or other changes to the order."
+  },
+  {
+    "row": 101,
+    "feature_en": "Multiple exchanges",
+    "translation_fr": "Echanges multiples",
+    "comment_fr": "Echangez plusieurs fois une commande (order).",
+    "comment_en": "Exchange an order multiple times."
+  },
+  {
+    "row": 102,
+    "feature_en": "GST tax (India)",
+    "translation_fr": "Taxe GST (India)",
+    "comment_fr": "La gestion de la taxe GST pour l’Inde est supportée",
+    "comment_en": "GST tax management for India."
+  },
+  {
+    "row": 103,
+    "feature_en": "APD tax exemption for travelers under 16 years old (Great Britain)",
+    "translation_fr": "Exonération de taxe APD pour  voyageur agé de moins de 16 ans (Grande Bretagne)",
+    "comment_fr": "Gestion de l’exemption de taxe APD pour les voyageurs agés de moins de 16 ans (Grande Bretagne)",
+    "comment_en": "Air Passenger Duty (APD) tax exemption management for travelers under 16 years of age (GB)."
+  },
+  {
+    "row": 104,
+    "feature_en": "Order history",
+    "translation_fr": "Historique de la commande (Order)",
+    "comment_fr": ") L’historique de la commande (Order) donne un aperçu des actions réalisées.",
+    "comment_en": "The order history provides an overview of actions taken."
+  },
+  {
+    "row": 105,
+    "feature_en": "Split order",
+    "translation_fr": "Séparation de commande (Split)",
+    "comment_fr": "Séparation de la commande initiale.",
+    "comment_en": "Split the initial order into different orders."
+  },
+  {
+    "row": 106,
+    "feature_en": "Retrieve a canceled order",
+    "translation_fr": "Retrouver une commande annulée",
+    "comment_fr": "Retrouvez une commande annulée, jusqu'à 5 ans après la date du dernier vol.",
+    "comment_en": "Retrieve a canceled order, up to 5 years after the date of the last flight."
+  },
+  {
+    "row": 108,
+    "feature_en": "SYNCHRONIZATION",
+    "translation_fr": "",
+    "comment_fr": "",
+    "comment_en": ""
+  },
+  {
+    "row": 109,
+    "feature_en": "Voluntary or involuntary flight segments rebooking via Air France or KLM",
+    "translation_fr": "Rebooking volontaire ou involontaire de segments de vol via Air France ou KLM",
+    "comment_fr": "Synchronisation de la commande (Order) avec les segments de vol modifiés par Air France ou KLM.",
+    "comment_en": "Order synchronization of flight segments changed by Air France or KLM."
+  },
+  {
+    "row": 110,
+    "feature_en": "Paid options ( extra baggage or seat option) booked by Trade Support",
+    "translation_fr": "Options payantes (bagage supplémentaire ou siège payant) réservés par le Support Agences",
+    "comment_fr": "Synchronisation de la commande (Order) avec les produits complémentaires réservés par le Support Agences.",
+    "comment_en": "Order synchronization of ancillary booked via Trade Support."
+  },
+  {
+    "row": 112,
+    "feature_en": "GEOGRAPHICAL COMMERCIAL ACTIVITY (GENERAL OVERVIEW ONLY - NOT SPECIFIED IN THE FILE PER AGGREGATOR",
+    "translation_fr": "",
+    "comment_fr": "",
+    "comment_en": ""
+  },
+  {
+    "row": 113,
+    "feature_en": "Europe",
+    "translation_fr": "Europe",
+    "comment_fr": "",
+    "comment_en": ""
+  },
+  {
+    "row": 114,
+    "feature_en": "North America",
+    "translation_fr": "Amérique du Nord",
+    "comment_fr": "",
+    "comment_en": ""
+  },
+  {
+    "row": 115,
+    "feature_en": "South America",
+    "translation_fr": "Amérique du Sud",
+    "comment_fr": "",
+    "comment_en": ""
+  },
+  {
+    "row": 116,
+    "feature_en": "Africa",
+    "translation_fr": "Afrique",
+    "comment_fr": "",
+    "comment_en": ""
+  },
+  {
+    "row": 117,
+    "feature_en": "Middle East",
+    "translation_fr": "Moyen-orient",
+    "comment_fr": "",
+    "comment_en": ""
+  },
+  {
+    "row": 118,
+    "feature_en": "Indian Sub Continent",
+    "translation_fr": "Sous continent Indien",
+    "comment_fr": "",
+    "comment_en": ""
+  },
+  {
+    "row": 119,
+    "feature_en": "Asia-Pacific",
+    "translation_fr": "Asie-Pacifique",
+    "comment_fr": "",
+    "comment_en": ""
+  },
+  {
+    "row": 121,
+    "feature_en": "Not in main table/Not in Flyer",
+    "translation_fr": "",
+    "comment_fr": "",
+    "comment_en": ""
+  },
+  {
+    "row": 122,
+    "feature_en": "Multiple Pricing Program",
+    "translation_fr": "Kept for now but not in the main table",
+    "comment_fr": "",
+    "comment_en": ""
+  },
+  {
+    "row": 123,
+    "feature_en": "APP Automated Pricing Program (wit NAM private/special fares)",
+    "translation_fr": "Kept for now but not in the main table",
+    "comment_fr": "",
+    "comment_en": ""
+  },
+  {
+    "row": 124,
+    "feature_en": "APP Automated Pricing Program (without NAM private/special fares)",
+    "translation_fr": "Kept for now but not in the main table",
+    "comment_fr": "",
+    "comment_en": ""
+  },
+  {
+    "row": 125,
+    "feature_en": "Free involuntary rebooking for orders with bag",
+    "translation_fr": "Kept for now but not in the main table",
+    "comment_fr": "",
+    "comment_en": ""
+  },
+  {
+    "row": 126,
+    "feature_en": "Free involuntary rebooking for orders with seat",
+    "translation_fr": "Kept for now but not in the main table",
+    "comment_fr": "",
+    "comment_en": ""
+  },
+  {
+    "row": 127,
+    "feature_en": "Email notification to travel agency in case of disruption outside check-in window",
+    "translation_fr": "Notification par courriel à l'agence de voyage en cas de perturbation en dehors de la fenêtre d'enregistrement",
+    "comment_fr": "",
+    "comment_en": "An email notification is sent to the travel agency in case of disruption outside the check-in window (30 hours before departure)"
+  },
+  {
+    "row": 128,
+    "feature_en": "Version",
+    "translation_fr": "",
+    "comment_fr": "",
+    "comment_en": ""
+  },
+  {
+    "row": 130,
+    "feature_en": "New Functionality/To be worked by all",
+    "translation_fr": "",
+    "comment_fr": "",
+    "comment_en": ""
+  },
+  {
+    "row": 131,
+    "feature_en": "Voluntary rebooking with AUTO preselection of paid bags or seats during the selection of the new itinerary (readding these ancillaries for the flights that changed)",
+    "translation_fr": "",
+    "comment_fr": "",
+    "comment_en": ""
+  },
+  {
+    "row": 132,
+    "feature_en": "Disruption clean up for unpaid order (expected no extra implementation from partner",
+    "translation_fr": "",
+    "comment_fr": "",
+    "comment_en": ""
+  },
+  {
+    "row": 133,
+    "feature_en": "Involuntary rebooking for unpaid order (keep the same price if customer wants a new itinerary option)",
+    "translation_fr": "",
+    "comment_fr": "",
+    "comment_en": ""
+  },
+  {
+    "row": 134,
+    "feature_en": "Synchronization of free special services from PNR to Order BSCT, FRAG, DPNA, MEDA, PPOC, SVAN, WCBD, WCBW, WCHC, WCLB, WCMP, WCOB, WDMP (Activation per aggregator needed)",
+    "translation_fr": "",
+    "comment_fr": "",
+    "comment_en": ""
+  },
+  {
+    "row": 135,
+    "feature_en": "Voluntary rebooking with reuse original EMD for readdition of ancillary AFTER performing flight rebooking",
+    "translation_fr": "",
+    "comment_fr": "",
+    "comment_en": ""
+  },
+  {
+    "row": 136,
+    "feature_en": "Involuntary rebooking after cancel only case",
+    "translation_fr": "",
+    "comment_fr": "",
+    "comment_en": ""
+  },
+  {
+    "row": 137,
+    "feature_en": "Involuntary rebooking within 48hrs",
+    "translation_fr": "",
+    "comment_fr": "",
+    "comment_en": ""
+  },
+  {
+    "row": 138,
+    "feature_en": "Involuntary refund cases within 48hrs with 2 tickets",
+    "translation_fr": "",
+    "comment_fr": "",
+    "comment_en": ""
+  },
+  {
+    "row": 139,
+    "feature_en": "New titles Dr, Prof Rev",
+    "translation_fr": "",
+    "comment_fr": "",
+    "comment_en": ""
+  }
+]

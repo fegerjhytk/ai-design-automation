@@ -20,6 +20,9 @@ const PUPPET_SKILL_DIR = path.join(SKILLS_DIR, 'after-effects-puppet-animations'
 const PUB_PERK_SKILL_DIR = path.join(SKILLS_DIR, 'pub-perk-animation');
 const ZIGMA_PROD_SKILL_DIR = path.join(SKILLS_DIR, 'zigma-commercial-video-production');
 const ZIGMA_OPENER_SKILL_DIR = path.join(SKILLS_DIR, 'zigma-start-opener-video');
+const QC_DIFF_SKILL_DIR = path.join(SKILLS_DIR, 'design-qc-visual-diff');
+const AE_MOTION_CLONE_SKILL_DIR = path.join(SKILLS_DIR, 'ae-motion-clone');
+const AE_COMP_TO_GIF_SKILL_DIR = path.join(SKILLS_DIR, 'ae-comp-to-gif');
 
 const AE_APP_NAME = process.env.AFTER_EFFECTS_APP || 'Adobe After Effects 2026';
 const AE_APP_PATH = '/Applications/Adobe After Effects 2026/Adobe After Effects 2026.app';
@@ -39,6 +42,9 @@ function checkAfterEffectsHealth() {
       pubPerkAnimation: fs.existsSync(PUB_PERK_SKILL_DIR),
       zigmaProduction: fs.existsSync(ZIGMA_PROD_SKILL_DIR),
       zigmaOpener: fs.existsSync(ZIGMA_OPENER_SKILL_DIR),
+      qcVisualDiff: fs.existsSync(QC_DIFF_SKILL_DIR),
+      motionClone: fs.existsSync(AE_MOTION_CLONE_SKILL_DIR),
+      compToGif: fs.existsSync(AE_COMP_TO_GIF_SKILL_DIR),
     }
   };
 
@@ -256,6 +262,139 @@ function buildAIVideoShowcaseComp(options = {}) {
   return executeAEScript(runCode);
 }
 
+/**
+ * 8. Pre-Flight Artwork Audit for Animation (via design-qc-visual-diff)
+ * Audits vector artwork, fonts, and swatches before importing into After Effects
+ */
+function preflightArtworkForAnimation(aiPath) {
+  console.log(`[After Effects Pre-Flight] Auditing vector artwork for animation integrity: ${aiPath || "active"}`);
+  const runnerPath = path.join(QC_DIFF_SKILL_DIR, 'scripts', 'qc_runner.py');
+  if (!fs.existsSync(runnerPath)) {
+    return { success: false, error: "design-qc-visual-diff skill not found" };
+  }
+  try {
+    const res = execSync(`python3 "${runnerPath}" --active`, { encoding: 'utf8', stdio: ['pipe', 'pipe', 'pipe'] });
+    return { success: true, output: res };
+  } catch (err) {
+    return { success: false, error: err.message, output: err.stdout };
+  }
+}
+
+/**
+ * 9. Visual Change Diffing for Video Animation & Storyboard Revisions
+ * Generates side-by-side image comparison, marked diffs with bounding boxes/pins,
+ * and an interactive HTML split-screen curtain slider.
+ */
+function generateAnimationVisualDiff(beforePath, afterPath, outputDir, mode = 'all') {
+  console.log(`[After Effects Proofing] Generating Visual Change Diff (${mode} mode)...`);
+  const enginePath = path.join(QC_DIFF_SKILL_DIR, 'scripts', 'visual_diff_engine.py');
+  if (!fs.existsSync(enginePath)) {
+    return { success: false, error: "visual_diff_engine.py not found in design-qc-visual-diff" };
+  }
+  const out = outputDir || path.join(process.env.HOME, 'Downloads', 'AE_Visual_Diff');
+  try {
+    const cmd = `uv run --with pillow python3 "${enginePath}" --before "${beforePath}" --after "${afterPath}" --mode ${mode} --output "${out}"`;
+    const res = execSync(cmd, { encoding: 'utf8', stdio: ['pipe', 'pipe', 'pipe'] });
+    return { success: true, outputDir: out, log: res };
+  } catch (err) {
+    return { success: false, error: err.message, output: err.stdout };
+  }
+}
+
+/**
+ * 10. Reference-Driven Motion Cloning (ae-motion-clone)
+ * Extracts motion choreography, physical trajectories (cascade drop, carousel scroll, elastic pop, stagger slide)
+ * from reference videos/URLs and injects them directly into any composition.
+ */
+function cloneMotionFromReference(options = {}) {
+  const cloneScript = path.join(AE_MOTION_CLONE_SKILL_DIR, 'scripts', 'clone_motion.sh');
+  if (!fs.existsSync(cloneScript)) {
+    throw new Error(`ae-motion-clone script not found at: ${cloneScript}`);
+  }
+
+  const compName = options.compName || options.comp;
+  if (!compName) {
+    throw new Error(`--comp <CompName> is required for motion cloning.`);
+  }
+
+  const args = ['--comp', compName];
+  if (options.ref) args.push('--ref', options.ref);
+  if (options.archetype) args.push('--archetype', options.archetype);
+  if (options.layout) args.push('--layout', options.layout);
+  if (options.duration) args.push('--duration', String(options.duration));
+  if (options.stagger) args.push('--stagger', String(options.stagger));
+  if (options.hold) args.push('--hold', String(options.hold));
+  if (options.elementsOnly !== false) args.push('--elements-only');
+  else args.push('--include-text');
+  if (options.previewGif) args.push('--preview-gif');
+
+  console.log(`[After Effects] Cloning reference motion into comp: "${compName}"...`);
+  console.log(`  + Archetype: ${options.archetype || 'cascade_drop'} | Layout: ${options.layout || 'as-is'}`);
+  if (options.ref) console.log(`  + Reference: ${options.ref}`);
+
+  const res = spawnSync(cloneScript, args, { encoding: 'utf8', stdio: ['pipe', 'pipe', 'pipe'] });
+  if (res.stdout) console.log(res.stdout.trim());
+  if (res.stderr) console.error(res.stderr.trim());
+
+  if (res.status !== 0) {
+    throw new Error(`Motion clone execution failed.`);
+  }
+
+  const resultPath = '/tmp/ae_motion_result.json';
+  let details = {};
+  if (fs.existsSync(resultPath)) {
+    try { details = JSON.parse(fs.readFileSync(resultPath, 'utf8')); } catch (_) {}
+  }
+
+  return {
+    success: true,
+    compName,
+    archetype: options.archetype || 'cascade_drop',
+    details
+  };
+}
+
+/**
+ * 11. Harmonic Smooth GIF Export (ae-comp-to-gif)
+ * Converts AE comp into 50/25/20 FPS GIFs inside Output/GIFs_High & Output/GIFs_Web
+ * with automated intermediate MP4 cleanup.
+ */
+function exportCompToSmoothGif(options = {}) {
+  const exportScript = path.join(AE_COMP_TO_GIF_SKILL_DIR, 'scripts', 'ae_to_gif.sh');
+  if (!fs.existsSync(exportScript)) {
+    throw new Error(`ae-comp-to-gif script not found at: ${exportScript}`);
+  }
+
+  const compName = options.compName || options.comp;
+  if (!compName) {
+    throw new Error(`exportCompToSmoothGif requires --comp <CompName>`);
+  }
+
+  const args = ['--comp', compName];
+  if (options.duration) args.push('--duration', String(options.duration));
+  if (options.fps) args.push('--fps', String(options.fps));
+  if (options.out) args.push('--out', options.out);
+  if (options.project) args.push('--project', options.project);
+  if (options.skipWeb) args.push('--skip-web');
+
+  console.log(`[After Effects] Exporting smooth GIF via ae-comp-to-gif...`);
+  console.log(`  + Comp: ${compName}`);
+  console.log(`  + Duration: ${options.duration ? options.duration + 's' : 'Comp Duration'}`);
+  console.log(`  + FPS: ${options.fps || 'auto (harmonic 50/25)'}`);
+
+  const res = spawnSync(exportScript, args, { encoding: 'utf8', stdio: 'inherit' });
+  if (res.status !== 0) {
+    throw new Error(`Smooth GIF export execution failed.`);
+  }
+
+  return {
+    success: true,
+    compName,
+    duration: options.duration,
+    fps: options.fps || 'auto'
+  };
+}
+
 // CLI Testing & Verification Interface
 if (require.main === module) {
   const health = checkAfterEffectsHealth();
@@ -269,6 +408,9 @@ if (require.main === module) {
   console.log(`    - Pub Perk Promo Comp: ${health.skillsFound.pubPerkAnimation ? '✓ Ready' : '✗ Missing'}`);
   console.log(`    - Zigma Video Prod:    ${health.skillsFound.zigmaProduction ? '✓ Ready' : '✗ Missing'}`);
   console.log(`    - Zigma Opener Video:  ${health.skillsFound.zigmaOpener ? '✓ Ready' : '✗ Missing'}`);
+  console.log(`    - QC & Visual Diff:    ${health.skillsFound.qcVisualDiff ? '✓ Ready' : '✗ Missing'}`);
+  console.log(`    - AE Motion Clone:     ${health.skillsFound.motionClone ? '✓ Ready' : '✗ Missing'}`);
+  console.log(`    - AE Smooth GIF:       ${health.skillsFound.compToGif ? '✓ Ready' : '✗ Missing'}`);
   console.log("=============================================");
 }
 
@@ -279,5 +421,9 @@ module.exports = {
   animatePromoComp,
   applyBuoyancyPhysics,
   renderAEPComposition,
-  buildAIVideoShowcaseComp
+  buildAIVideoShowcaseComp,
+  preflightArtworkForAnimation,
+  generateAnimationVisualDiff,
+  cloneMotionFromReference,
+  exportCompToSmoothGif
 };

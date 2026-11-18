@@ -1,0 +1,13 @@
+{
+  "name": "brand-engine-mcp",
+  "displayName": "Brand & Motion Engine MCP",
+  "version": "1.0.0",
+  "description": "Deterministic brand strategy, typography kerning, unflattened Adobe Illustrator CC master artboard generation, Google Flow retail staging, and GSAP kinetic motion sync.",
+  "suggestedPrompts": [
+    "Run an anti-sameness category audit for a premium matcha brand in India",
+    "Build unflattened Illustrator master artwork with hero wordmark and secondary seal",
+    "Audit typographic kerning between characters in my brand wordmark",
+    "Generate a retail shelf environmental mockup prompt for Google Flow",
+    "Create a frame-accurate GSAP kinetic typography motion schedule from audio markers"
+  ]
+}

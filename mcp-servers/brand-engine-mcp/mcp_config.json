@@ -1,0 +1,14 @@
+{
+  "mcpServers": {
+    "brand_engine": {
+      "command": "node",
+      "args": [
+        "/Users/admin/.gemini/config/plugins/brand-engine-mcp/server.js"
+      ],
+      "env": {
+        "OUTPUT_DIR": "/Users/admin/Desktop",
+        "DOWNLOADS_DIR": "/Users/admin/Downloads"
+      }
+    }
+  }
+}

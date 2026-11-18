@@ -12,8 +12,15 @@ import fs from "node:fs";
 import path from "node:path";
 import crypto from "node:crypto";
 import { fileURLToPath } from "node:url";
-import sharp from "sharp";
 import NodeCache from "node-cache";
+
+let sharp = null;
+try {
+  const sharpMod = await import("sharp");
+  sharp = sharpMod.default || sharpMod;
+} catch (e) {
+  // sharp native addon optional
+}
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const authDir = path.join(__dirname, "auth_info");

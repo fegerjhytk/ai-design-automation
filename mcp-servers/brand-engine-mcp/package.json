@@ -1,0 +1,13 @@
+{
+  "name": "brand-engine-mcp",
+  "version": "1.0.0",
+  "description": "Model Context Protocol Server for Autonomous Brand Identity & Motion Animation Workflows",
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "keywords": ["mcp", "branding", "illustrator", "animation", "motion", "anti-sameness"],
+  "author": "Antigravity",
+  "license": "MIT"
+}
