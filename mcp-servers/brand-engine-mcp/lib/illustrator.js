@@ -1,6 +1,6 @@
 /**
  * Adobe Illustrator CC Automation Core
- * Executes ExtendScript headlessly via macOS osascript to build master brand files.
+ * Runs ExtendScript in desktop Illustrator via macOS AppleScript.
  */
 
 import { execFileSync } from "node:child_process";
@@ -16,27 +16,41 @@ export function buildBrandIdentity(options) {
     tracking = -20,
     primaryColorHex = "#4A0E17",
     secondarySealName = "Bonsai_Seal",
-    dielineType = "tin_can_100g",
-    outputDir = path.join(os.homedir(), "Desktop")
+    outputDir = process.env.OUTPUT_DIR || path.join(os.homedir(), "Desktop")
   } = options;
 
-  const targetProjectDir = path.join(outputDir, projectName);
-  if (!fs.existsSync(targetProjectDir)) {
-    fs.mkdirSync(targetProjectDir, { recursive: true });
+  if (typeof projectName !== "string" || !projectName.trim() ||
+      projectName === "." || projectName === ".." || /[/\\:\x00-\x1f]/.test(projectName)) {
+    throw new Error("project_name must be a single valid folder name.");
+  }
+  for (const [name, value] of Object.entries({ wordmark, fontName, secondarySealName })) {
+    if (typeof value !== "string" || !value.trim()) {
+      throw new Error(name + " must be a nonempty string.");
+    }
+  }
+  if (!Number.isFinite(tracking)) throw new Error("tracking must be a finite number.");
+  if (typeof primaryColorHex !== "string" || !/^#?[0-9a-f]{6}$/i.test(primaryColorHex)) {
+    throw new Error("primary_color_hex must be a six-digit RGB color.");
   }
 
-  // Parse Hex to RGB
-  const hex = primaryColorHex.replace("#", "");
-  const r = parseInt(hex.substring(0, 2), 16) || 74;
-  const g = parseInt(hex.substring(2, 4), 16) || 14;
-  const b = parseInt(hex.substring(4, 6), 16) || 23;
+  const targetProjectDir = path.resolve(outputDir, projectName);
+  const aiFilePath = path.join(targetProjectDir, projectName + ".ai");
+  fs.mkdirSync(targetProjectDir, { recursive: true });
+  if (fs.realpathSync(targetProjectDir) !== path.join(fs.realpathSync(outputDir), projectName)) {
+    throw new Error("The project folder points outside the configured output location.");
+  }
+  if (fs.existsSync(aiFilePath)) throw new Error("The Illustrator master already exists.");
 
-  const scriptPath = path.join(os.tmpdir(), `build_brand_${Date.now()}.jsx`);
-  const aiFilePath = path.join(targetProjectDir, `${projectName}.ai`);
+  const hex = primaryColorHex.replace(/^#/, "");
+  const [r, g, b] = hex.match(/../g).map(channel => parseInt(channel, 16));
+  const tempDir = fs.mkdtempSync(path.join(os.tmpdir(), "brand-build-"));
+  const scriptPath = path.join(tempDir, "build.jsx");
+  const scriptString = value => JSON.stringify(value)
+    .replace(/\u2028/g, "\\u2028").replace(/\u2029/g, "\\u2029");
 
   const jsxContent = `
 #target illustrator
-app.userInteractionLevel = UserInteractionLevel.DONTDISPLAYALERTS;
+
 
 function hexToRgb(rVal, gVal, bVal) {
     var c = new RGBColor();
@@ -47,6 +61,9 @@ function hexToRgb(rVal, gVal, bVal) {
 }
 
 function main() {
+    var saveFile = new File(${scriptString(aiFilePath)});
+    if (saveFile.exists) throw new Error("The Illustrator master already exists.");
+
     // 1080x1080 pt master artboard
     var doc = app.documents.add(DocumentColorSpace.RGB, 1080, 1080);
 
@@ -84,7 +101,7 @@ function main() {
     sealBadge.strokeWidth = 1.5;
 
     var sealText = sealLayer.textFrames.add();
-    sealText.contents = "${secondarySealName}";
+    sealText.contents = ${scriptString(secondarySealName)};
     sealText.top = -820;
     sealText.left = 505;
     sealText.textRange.characterAttributes.size = 12;
@@ -95,12 +112,12 @@ function main() {
     wordmarkLayer.name = "Wordmark (Hero)";
 
     var wmText = wordmarkLayer.textFrames.add();
-    wmText.contents = "${wordmark.toUpperCase()}";
+    wmText.contents = ${scriptString(wordmark.toUpperCase())};
     wmText.top = -480;
     wmText.left = 240;
     
     try {
-        wmText.textRange.characterAttributes.textFont = app.textFonts.getByName("${fontName}");
+        wmText.textRange.characterAttributes.textFont = app.textFonts.getByName(${scriptString(fontName)});
     } catch(e) {
         // Fallback gracefully if PostScript font not loaded
     }
@@ -111,7 +128,6 @@ function main() {
     wmText.textRange.characterAttributes.fillColor = white;
 
     // Save master file
-    var saveFile = new File("${aiFilePath.replace(/\\/g, '/')}");
     var saveOpts = new IllustratorSaveOptions();
     saveOpts.pdfCompatible = true;
     doc.saveAs(saveFile, saveOpts);
@@ -119,14 +135,30 @@ function main() {
     return "SUCCESS: " + saveFile.fsName;
 }
 
-main();
+var previousInteractionLevel = app.userInteractionLevel;
+try {
+    app.userInteractionLevel = UserInteractionLevel.DONTDISPLAYALERTS;
+    main();
+} finally {
+    app.userInteractionLevel = previousInteractionLevel;
+}
 `;
 
   fs.writeFileSync(scriptPath, jsxContent);
 
   try {
-    const osaScript = `tell application id "com.adobe.illustrator" to do javascript (read POSIX file "${scriptPath}")`;
-    const result = execFileSync("osascript", ["-e", osaScript], { encoding: "utf8" });
+    const osaScript = 'on run argv\n' +
+      'tell application id "com.adobe.illustrator" to do javascript (read POSIX file (item 1 of argv))\n' +
+      'end run';
+    const result = execFileSync("/usr/bin/osascript", ["-e", osaScript, scriptPath], {
+      encoding: "utf8",
+      timeout: 90_000
+    });
+    if (!fs.existsSync(aiFilePath) || fs.statSync(aiFilePath).size === 0) {
+      throw new Error("Illustrator did not write a nonempty master file.");
+    }
+    fs.unlinkSync(scriptPath);
+    fs.rmdirSync(tempDir);
     return {
       status: "success",
       master_ai_file: aiFilePath,
@@ -134,15 +166,15 @@ main();
       layer_architecture: [
         "Wordmark (Hero) -> 100% vector typography (isolated, zero icons)",
         "Secondary Seals -> Modular badge/stamp (The Bonsai Rule)",
-        "Atmospheric Gradients -> Deep background falloff & shadow blending",
-        "Packaging Dielines -> 1:1 scale container bounds"
+        "Atmospheric Gradients -> Solid brand-color background",
+        "Packaging Dielines -> Rectangular placeholder bounds"
       ],
       raw_output: result.trim()
     };
   } catch (err) {
     return {
       status: "fallback_generated",
-      message: `Script written to ${scriptPath}. Could not trigger live Illustrator via AppleScript (is Illustrator open?).`,
+      message: `Script written to ${scriptPath}. Illustrator automation did not confirm a saved master.`,
       script_path: scriptPath,
       target_ai_path: aiFilePath,
       error: err.message

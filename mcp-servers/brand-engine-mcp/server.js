@@ -62,13 +62,13 @@ const TOOLS = [
   },
   {
     name: "illustrator_build_identity",
-    description: "Executes headless ExtendScript in Adobe Illustrator CC to build a master .ai file with unflattened layers strictly isolating Wordmark (Hero), Secondary Seals (The Bonsai Rule), Atmospheric Gradients, and Packaging Dielines.",
+    description: "Runs ExtendScript in macOS Adobe Illustrator to build an editable master .ai file with separate wordmark, secondary seal, background and placeholder dieline layers.",
     inputSchema: {
       type: "object",
       properties: {
         project_name: {
           type: "string",
-          description: "Project directory name on Desktop."
+          description: "Project folder name under the configured output directory (Desktop by default)."
         },
         wordmark: {
           type: "string",
@@ -128,7 +128,7 @@ const TOOLS = [
   },
   {
     name: "motion_sync_timeline",
-    description: "Calculates word-level cadence, GSAP keyframe schedules, and easing curves for kinetic typography and video animation (HyperFrames / After Effects) matching a given BPM and duration.",
+    description: "Schedules kinetic typography on a BPM grid and returns GSAP code for HyperFrames plus an editable After Effects composition script.",
     inputSchema: {
       type: "object",
       properties: {

@@ -20,9 +20,9 @@ export class FlowPage {
    */
   public async ensureOnFlow(): Promise<void> {
     const url = this.page.url();
-    if (!url.includes('flow.google')) {
-      logger.info('Navigating to https://flow.google...');
-      await this.page.goto('https://flow.google', { waitUntil: 'domcontentloaded', timeout: 30000 });
+    if (!url.includes('flow.google.com') || url.includes('404')) {
+      logger.info('Navigating to https://flow.google.com/...');
+      await this.page.goto('https://flow.google.com/', { waitUntil: 'domcontentloaded', timeout: 30000 });
       await this.page.waitForTimeout(2000);
     }
   }
@@ -119,7 +119,7 @@ export class FlowPage {
 
     // Direct navigation fallback if button not found
     try {
-      await this.page.goto('https://flow.google/studio', { waitUntil: 'domcontentloaded', timeout: 15000 });
+      await this.page.goto('https://flow.google.com/', { waitUntil: 'domcontentloaded', timeout: 15000 });
       return {
         success: true,
         currentUrl: this.page.url(),

@@ -15,4 +15,4 @@ When working with brand identity design, packaging, and kinetic motion animation
    - Always test packaging across retail shelf or real-world lighting environments via Google Flow before finalizing print artwork. Always confirm aspect ratio with the user.
 
 4. **Kinetic Motion Choreography (`motion_sync_timeline`)**:
-   - Use `motion_sync_timeline` to generate mathematically aligned GSAP easing schedules matching audio BPM for HyperFrames and After Effects.
+   - Use `motion_sync_timeline` for BPM-based word timing. It returns GSAP for HyperFrames and JSX with native keyframes for After Effects.

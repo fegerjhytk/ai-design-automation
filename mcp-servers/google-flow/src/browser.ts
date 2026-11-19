@@ -217,9 +217,9 @@ export class BrowserManager {
     const config = loadConfig();
     const currentUrl = page.url();
 
-    if (!currentUrl.includes('flow.google')) {
-      logger.info('Navigating page to %s...', config.flowUrl);
-      await page.goto(config.flowUrl, { waitUntil: 'domcontentloaded', timeout: 30000 });
+    if (!currentUrl.includes('flow.google.com') || currentUrl.includes('404')) {
+      logger.info('Navigating page to https://flow.google.com/...');
+      await page.goto('https://flow.google.com/', { waitUntil: 'domcontentloaded', timeout: 30000 });
     }
 
     const initialCheck = await this.checkAuthStatus();

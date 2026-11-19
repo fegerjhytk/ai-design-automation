@@ -6,9 +6,9 @@ Deterministic Model Context Protocol (MCP) server for autonomous brand strategy,
 
 1. `brand_anti_sameness_audit`: Deconstructs industry categories, surfaces cliches, and generates counter-anchor palettes and negative prompts.
 2. `audit_typographic_kerning`: Scans character pairs for optical white-space traps and calculates tracking offsets.
-3. `illustrator_build_identity`: Headlessly generates unflattened `.ai` master documents with 4-tier layer isolation.
+3. `illustrator_build_identity`: Uses desktop Illustrator on macOS to generate editable four-layer `.ai` starter files. Uses `OUTPUT_DIR` when set and Desktop otherwise.
 4. `stage_environmental_mockup`: Prepares Google Flow / Nano Banana 2.1 scene prompts for testing packaging under retail shelf and daylight conditions.
-5. `motion_sync_timeline`: Calculates frame-accurate GSAP kinetic typography schedules for HyperFrames and After Effects.
+5. `motion_sync_timeline`: Returns a frame-aligned word schedule, GSAP for HyperFrames, and JSX that adds an editable 1920 × 1080 composition to the current After Effects project. Word starts follow the beat grid or subdivisions when the requested cadence needs them. The JSX uses native position and opacity keyframes. After Effects project saves and renders are separate steps.
 6. `codex_review_dispatch`: Prepares structured distinctiveness critique payloads for `/ask-codex`.
 
 ## Installation & Running
