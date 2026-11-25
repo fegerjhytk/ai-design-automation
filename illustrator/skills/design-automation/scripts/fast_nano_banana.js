@@ -71,30 +71,29 @@ async function generateHeadlessImages(options = {}) {
       throw err;
     }
   } else {
-    // Mode 2: Headless Google Flow Session Bridge (Zero Chrome GUI)
+    // Mode 2: Google Flow Session Notification
     const sessionPath = path.join(process.env.HOME, '.google-flow-mcp', 'session.json');
     if (fs.existsSync(sessionPath)) {
-      console.log(`  ✓ Using captured Google Flow session (${sessionPath})`);
-      const session = JSON.parse(fs.readFileSync(sessionPath, 'utf8'));
-      console.log(`  ✓ Authenticated user project: ${session.projectId}`);
-      console.log(`  ✓ Running pure headless generation (Zero Chrome window, low RAM)`);
-
-      const startTime = Date.now();
-      // Execute headless generation via background session bridge
-      const elapsed = ((Date.now() - startTime) / 1000).toFixed(2);
-      
-      return {
-        success: true,
-        mode: 'google-flow-session',
-        projectId: session.projectId,
-        sessionActive: true,
-        message: 'Google Flow session authenticated and locked in. Headless mode ready.'
-      };
-    } else {
-      console.log(`[Fast Nano Banana] No API key or session found.`);
+      console.log(`  ✓ Detected Google Flow session (${sessionPath})`);
+      let projectId = "active";
+      try {
+        const session = JSON.parse(fs.readFileSync(sessionPath, 'utf8'));
+        projectId = session.projectId || projectId;
+      } catch (_) {}
+      console.log(`  ! Direct SDK key not set. For Google Flow session generation, call MCP flow_generate_image.`);
       return {
         success: false,
-        message: 'No GEMINI_API_KEY or Google Flow session found. Run capture to initialize.'
+        mode: 'google-flow-session',
+        projectId: projectId,
+        files: [],
+        message: 'Direct SDK key (GEMINI_API_KEY) not found. To generate via Flow session, invoke the google-flow MCP tool flow_generate_image directly.'
+      };
+    } else {
+      console.log(`[Fast Nano Banana] No GEMINI_API_KEY or Google Flow session found.`);
+      return {
+        success: false,
+        files: [],
+        message: 'No GEMINI_API_KEY or Google Flow session found. Set GEMINI_API_KEY or authenticate via flow_login.'
       };
     }
   }

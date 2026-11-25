@@ -103,13 +103,29 @@ uv run --with pillow python3 ~/.gemini/config/skills/design-qc-visual-diff/scrip
 
 ### Generate Marked Comparison (Marked Diff Mode)
 ```bash
-# Generate marked diffs with red bounding boxes and numbered pins
-uv run --with pillow python3 ~/.gemini/config/skills/design-qc-visual-diff/scripts/visual_diff_engine.py \
-  --before "/path/to/file_v1.ai" \
-  --after "/path/to/file_v2.ai" \
+# Generate marked diffs with red bounding boxes and numbered pins (supports .ai, .png, and .pdf)
+uv run --with pillow --with pymupdf python3 ~/.gemini/config/skills/design-qc-visual-diff/scripts/visual_diff_engine.py \
+  --before "/path/to/file_v1.pdf" \
+  --after "/path/to/file_v2.pdf" \
   --mode marked \
   --output "/Users/admin/Downloads/QC_Visual_Diff"
 ```
+
+### Prepress CTP Plate Proof Verification Protocol
+When verifying a vendor CTP plate proof (e.g., `37757_VANDNA_..._605 X 745.pdf`) against approved 1-up artwork:
+1. **Mandatory Output Location (ALWAYS in Downloads)**:
+   - All generated QC comparison images, marked diffs, 3-panel composites, and CTP plate proof verification boards **MUST ALWAYS be placed directly in `/Users/admin/Downloads/`** (and mirrored inside `/Users/admin/Downloads/QC_Images/`).
+   - Never save QC images in internal brain directories or `/tmp` where the user cannot immediately find them in macOS Finder.
+2. **Imposition & Sheet Geometry**: Identify total ups, sheet dimensions (`605 x 745 mm`), layout orientation, and front/back or work-and-turn spreads.
+3. **Artwork Version Integrity Check**: Verify that the CTP plate uses the latest approved revision (e.g., Nov 2026 2,500 pcs) rather than an outdated baseline (e.g., 500 pcs).
+4. **Critical Print Checkpoints**:
+   - Nomenclature (`ROOM HEATER` vs generic `HEATER`).
+   - Essential factory markings (front fascia wordmarks, `DO NOT COVER` safety warnings, knob graduation numerals `0-4`).
+   - Customer support credentials (`customer.care@ledure.com` vs legacy addresses).
+   - Footer modernization (removal of legacy social media bars).
+5. **Clean Workspace Guarantee ("Remove All Extra")**:
+   - Always purge temporary raster tiles, scrap crops, and debug rasters upon task completion.
+   - Deliver strictly the final clean comparison summary table, marked diffs, and interactive dashboard directly in Downloads.
 
 ### Draw Markers Live in Illustrator
 ```bash

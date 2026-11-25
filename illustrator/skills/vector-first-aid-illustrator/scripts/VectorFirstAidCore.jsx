@@ -37,21 +37,29 @@ var VectorFirstAidCore = (function () {
             };
         }
 
-        var items = [];
         if (scopeType === "selection") {
-            items = container.selection || [];
-        } else {
-            // Document scope
-            try {
-                items = container.pageItems;
-            } catch (e) {
-                items = [];
+            var items = container.selection || [];
+            for (var i = 0; i < items.length; i++) {
+                processItem(items[i], out);
             }
-        }
-
-        for (var i = 0; i < items.length; i++) {
-            var item = items[i];
-            processItem(item, out);
+        } else {
+            // Document scope - direct collections avoid nested recursion and O(N^2) duplicates
+            try {
+                var p = container.pathItems;
+                for (var pi = 0; pi < p.length; pi++) out.paths.push(p[pi]);
+            } catch (e1) {}
+            try {
+                var tf = container.textFrames;
+                for (var ti = 0; ti < tf.length; ti++) out.textFrames.push(tf[ti]);
+            } catch (e2) {}
+            try {
+                var gi = container.groupItems;
+                for (var gi_idx = 0; gi_idx < gi.length; gi_idx++) out.groups.push(gi[gi_idx]);
+            } catch (e3) {}
+            try {
+                var cp = container.compoundPathItems;
+                for (var cpi = 0; cpi < cp.length; cpi++) out.compoundPaths.push(cp[cpi]);
+            } catch (e4) {}
         }
 
         return out;
@@ -454,6 +462,29 @@ var VectorFirstAidCore = (function () {
         }
     }
 
+    function stringify(obj) {
+        if (obj === null || obj === undefined) return "null";
+        var t = typeof obj;
+        if (t === "number" || t === "boolean") return String(obj);
+        if (t === "string") {
+            return '"' + obj.replace(/\\/g, "\\\\").replace(/"/g, '\\"').replace(/\n/g, "\\n").replace(/\r/g, "\\r") + '"';
+        }
+        if (obj instanceof Array) {
+            var arrParts = [];
+            for (var a = 0; a < obj.length; a++) {
+                arrParts.push(stringify(obj[a]));
+            }
+            return "[" + arrParts.join(",") + "]";
+        }
+        var parts = [];
+        for (var k in obj) {
+            if (obj.hasOwnProperty(k)) {
+                parts.push('"' + k + '":' + stringify(obj[k]));
+            }
+        }
+        return "{" + parts.join(",") + "}";
+    }
+
     return {
         CONFIG: CONFIG,
         scan: scan,
@@ -466,6 +497,7 @@ var VectorFirstAidCore = (function () {
         fixRedundantClippingMasks: fixRedundantClippingMasks,
         combineTextLines: combineTextLines,
         purgeUnusedResources: purgeUnusedResources,
-        showItem: showItem
+        showItem: showItem,
+        stringify: stringify
     };
 })();

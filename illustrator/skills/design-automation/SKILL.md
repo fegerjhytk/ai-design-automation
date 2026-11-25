@@ -18,6 +18,7 @@ flowchart TD
     A --> PS["scripts/photoshop_mars_controller.js (Mars Premedia Engine)"]
     A --> AE["scripts/after_effects_motion_controller.js"]
     A --> QC["design-qc-visual-diff (Automated QC & Visual Proofing Engine)"]
+    A --> CR["scripts/chrome_active_tab_controller.js (Chrome Active Tab Engine)"]
     
     subgraph FlowGen["Google Flow Media Generation"]
         GF --> GF1["Nano Banana 2.1 (Hero Images x4 -> Links/)"]
@@ -43,7 +44,7 @@ flowchart TD
     subgraph AEMotion["After Effects 2026 Integrated Skills (100% Free / Local)"]
         AE --> AE1["after-effects-puppet-animations (Reading Flow)"]
         AE --> AE2["pub-perk-animation (10s Multi-Offer Promo AEP)"]
-        AE --> AE3["zigma-commercial-video-production (9:16 Product Physics)"]
+        AE --> AE3["zigma-video-production (9:16 Product & Opener Standards)"]
         AE --> AE4["ae-motion-clone (Universal Reference Video Motion Cloner)"]
         AE --> AE5["ae-comp-to-gif (Harmonic 50/25 FPS Dual-Tier GIFs & Auto MP4 Purge)"]
         AE --> AE6["aerender Native Headless Export"]
@@ -152,7 +153,7 @@ Prepares standard project directory architecture on Desktop:
 - **Reference-Driven Motion Cloning (`ae-motion-clone`)**: Clones animation choreography directly from any reference video or web link (Behance, YouTube, Loom, MP4, GIF). Injects 4 physical archetypes: `cascade_drop` (Arôme Bakery style 4-phase lifecycle with air wobble and bounce), `carousel_scroll` (Slide 10 infinite seamless repeating card stream), `elastic_pop`, and `stagger_slide`. Enforces `--elements-only` rule (locks typography & background) and supports `--layout stacked` (middle-filling overlapping collage).
 - **Reading-Flow Puppet Animations**: Integrates `after-effects-puppet-animations` to sequence multi-layer vector layouts with kinetic ease curves and anchor point normalization.
 - **10-Second Promo Comps**: Integrates `pub-perk-animation` (`build_ae_animation.jsx`) to turn multi-offer `.ai` files into animated `.aep` packages.
-- **9:16 Vertical Commercial Ads**: Integrates `zigma-commercial-video-production` with floating buoyancy physics expressions and 3D badge callouts.
+- **9:16 Vertical Commercial Ads**: Integrates `zigma-video-production` with floating buoyancy physics expressions, 3D badge callouts, and opener/outro brand standards.
 - **Dual-Tier Smooth GIF Publisher (`ae-comp-to-gif`)**: Converts any composition into butter-smooth, non-lagging 50/25/20 FPS GIFs with seamless loop protection and two-pass differential palette optimization. Exports directly to `Output/GIFs_High/` (master full-res) and `Output/GIFs_Web/` (1024px web-optimized), and automatically purges intermediate rendered `.mp4` video files.
 - **Dynamic 9:16 AI Video Showcase Assembler (`ai_video_controller.js` / `build_ai_video_showcase.jsx`)**: Combines hero AI video footage (from Google Flow or image-to-video), clean 2-keyframe kinetic text overlays, master buoyancy slider controls, voice narration, and SFX whooshes into a complete commercial video ad package.
 - **Headless Render**: Exports via `/Applications/Adobe After Effects 2026/aerender` directly to `Output/`.
@@ -239,6 +240,16 @@ Prepares standard project directory architecture on Desktop:
 
 ---
 
+### Stage 12: Chrome Active Tab Automation (`chrome-active-tab-automation`)
+> [!NOTE]
+> Directly interacts with open, authenticated Google Chrome sessions on macOS (Google Flow, Instagram, Canva, web dashboards) via AppleScript, injected JavaScript, and native OS events without third-party browser drivers:
+> - **Zero-Driver Session Reuse**: Connects directly to existing user sessions and cookies; bypasses bot gates and anti-scraping blocks.
+> - **Rich-Text & React Input Injection (`isTrusted: false` Bypass)**: Automates rich-text editors (Meta Lexical, Draft.js, Notion, Slack) using system clipboard (`pbcopy`) and native AppleScript `Cmd+V` keystrokes.
+> - **In-Memory File Uploads**: Chunks local asset binaries into 400KB base64 blocks directly into tab memory, constructing synthetic DOM `DataTransfer` file lists to dispatch native `change` events on `<input type="file">`.
+> - **Low-Level Hardware Clicks**: Uses macOS CoreGraphics / Swift HID events for Canvas/SVG elements that ignore standard DOM `.click()` events.
+
+---
+
 ## CLI Usage
 
 ### Run Full Pipeline
@@ -310,6 +321,21 @@ node /Users/admin/.gemini/config/skills/design-automation/scripts/pipeline_runne
 
 # Generate Visual Difference Comparison (Image Mode & Marked Mode with Pins)
 node /Users/admin/.gemini/config/skills/design-automation/scripts/pipeline_runner.js --action diff --before "/path/to/before.ai" --after "/path/to/after.ai" --diff-mode all
+
+# Check Google Chrome automation and active tab matching
+node /Users/admin/.gemini/config/skills/design-automation/scripts/pipeline_runner.js --action chrome-status --domain "flow.google"
+
+# Execute JavaScript inside active Chrome tab matching target domain
+node /Users/admin/.gemini/config/skills/design-automation/scripts/pipeline_runner.js --action chrome-eval --domain "flow.google" --code "document.title"
+
+# Paste text via macOS system clipboard into rich-text/React inputs
+node /Users/admin/.gemini/config/skills/design-automation/scripts/pipeline_runner.js --action chrome-paste --domain "instagram.com" --selector "div[contenteditable=true]" --text "New visual campaign drop #luxury"
+
+# Upload local asset into Chrome file input via in-memory base64 DataTransfer
+node /Users/admin/.gemini/config/skills/design-automation/scripts/pipeline_runner.js --action chrome-upload --domain "canva.com" --file "/path/to/asset.png" --selector "input[type=file]"
+
+# Inject low-level CoreGraphics / Swift hardware click
+node /Users/admin/.gemini/config/skills/design-automation/scripts/pipeline_runner.js --action chrome-click --x 450 --y 320
 ```
 
 ---

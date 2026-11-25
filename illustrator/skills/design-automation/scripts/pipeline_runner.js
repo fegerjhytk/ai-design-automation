@@ -14,7 +14,7 @@
 
 const fs = require('fs');
 const path = require('path');
-const { execSync } = require('child_process');
+const { execSync, spawnSync } = require('child_process');
 const { 
   executeFastCommand, 
   clickMenuItemPath, 
@@ -50,6 +50,14 @@ const {
   auditMediaFolder,
   createBeforeAfter
 } = require('./photoshop_mars_controller');
+const {
+  checkChromeAutomationHealth,
+  isChromeTabOpen,
+  runInChromeTab,
+  typeViaSystemPaste,
+  uploadFileToChrome,
+  hardwareClick
+} = require('./chrome_active_tab_controller');
 
 class AutonomousDesignPipeline {
   constructor(options = {}) {
@@ -160,12 +168,11 @@ class AutonomousDesignPipeline {
       return { success: false, error: "QC skill not found" };
     }
     const flag = drawMarkers ? "--markers" : "--active";
-    try {
-      execSync(`python3 "${qcRunnerPath}" ${flag}`, { stdio: 'inherit' });
-      return { success: true };
-    } catch (e) {
-      return { success: false, error: e.message };
+    const res = spawnSync('python3', [qcRunnerPath, flag], { stdio: 'inherit' });
+    if (res.status !== 0) {
+      return { success: false, error: `QC exited with status ${res.status}` };
     }
+    return { success: true };
   }
 
   // Stage 1.8: Visual Difference Comparison (Image Mode & Marked Mode)
@@ -293,7 +300,7 @@ class AutonomousDesignPipeline {
   // Stage 5: Production Export
   exportProductionDeliverables() {
     console.log(`[Stage 5] Exporting Production Deliverables to: ${this.outputDir}`);
-    const safeBaseName = this.projectName.replace(/\\s+/g, '-');
+    const safeBaseName = this.projectName.replace(/\s+/g, '-');
     const pngPath = path.join(this.outputDir, `${safeBaseName}.png`);
     const jpgPath = path.join(this.outputDir, `${safeBaseName}.jpg`);
     const aiPath = path.join(this.projectDir, `${this.projectName}.ai`);
@@ -306,7 +313,7 @@ class AutonomousDesignPipeline {
 
         // 1. Save Master AI (Silent, zero modal dialogs)
         try {
-          var aiFile = new File("${aiPath.replace(/"/g, '\\"')}");
+          var aiFile = new File(${JSON.stringify(aiPath)});
           var saveOpts = new IllustratorSaveOptions();
           saveOpts.compatibility = Compatibility.ILLUSTRATOR24;
           saveOpts.pdfCompatible = true;
@@ -316,7 +323,7 @@ class AutonomousDesignPipeline {
         }
 
         // 2. Export High-Res PNG-24
-        var pngFile = new File("${pngPath.replace(/"/g, '\\"')}");
+        var pngFile = new File(${JSON.stringify(pngPath)});
         var expPng = new ExportOptionsPNG24();
         expPng.antiAliasing = true;
         expPng.transparency = false;
@@ -324,7 +331,7 @@ class AutonomousDesignPipeline {
         doc.exportFile(pngFile, ExportType.PNG24, expPng);
 
         // 3. Export Production JPEG
-        var jpgFile = new File("${jpgPath.replace(/"/g, '\\"')}");
+        var jpgFile = new File(${JSON.stringify(jpgPath)});
         var expJpg = new ExportOptionsJPEG();
         expJpg.antiAliasing = true;
         expJpg.artBoardClipping = true;
@@ -334,7 +341,7 @@ class AutonomousDesignPipeline {
         app.executeMenuCommand("fitin");
         app.redraw();
 
-        return ["OK", "${aiPath}", "${pngPath}", "${jpgPath}"].join("||");
+        return ["OK", ${JSON.stringify(aiPath)}, ${JSON.stringify(pngPath)}, ${JSON.stringify(jpgPath)}].join("||");
       })();
     `;
 
@@ -361,8 +368,7 @@ class AutonomousDesignPipeline {
     console.log(`  ✓ Skills Active:`);
     console.log(`    - Puppet Animations: ${health.skillsFound.puppetAnimations ? '✓' : '✗'}`);
     console.log(`    - Promo Graphics (Pub-Perk): ${health.skillsFound.pubPerkAnimation ? '✓' : '✗'}`);
-    console.log(`    - Zigma Video Production: ${health.skillsFound.zigmaProduction ? '✓' : '✗'}`);
-    console.log(`    - Zigma Opener Sequence: ${health.skillsFound.zigmaOpener ? '✓' : '✗'}`);
+    console.log(`    - Zigma Video Production: ${health.skillsFound.zigmaVideoProduction ? '✓' : '✗'}`);
     console.log(`    - AE Motion Clone: ${health.skillsFound.motionClone ? '✓' : '✗'}`);
     return health;
   }
@@ -414,6 +420,41 @@ class AutonomousDesignPipeline {
     });
   }
 
+  // Stage 12: Chrome Active Tab Automation
+  checkChromeStatus(domain = 'google.com') {
+    console.log(`[Stage 12] Checking Google Chrome Automation Health (Domain: ${domain})...`);
+    const status = checkChromeAutomationHealth(domain);
+    console.log(`  ✓ Chrome Running: ${status.chromeRunning ? 'Yes' : 'No'}`);
+    console.log(`  ✓ Apple Events Allowed: ${status.appleEventsAllowed ? 'Yes' : 'No'}`);
+    if (domain) {
+      console.log(`  ✓ Matching Tab Found (${domain}): ${status.matchingTabFound ? 'Yes' : 'No'}`);
+    }
+    if (status.error) console.warn(`  ! Error: ${status.error}`);
+    return status;
+  }
+
+  executeInChrome(code, domain = 'google.com') {
+    console.log(`[Stage 12] Executing JavaScript in Chrome tab matching: ${domain}...`);
+    const result = runInChromeTab(code, domain);
+    console.log(`  ✓ Result: ${result}`);
+    return result;
+  }
+
+  pasteInChrome(selector, text, domain = 'google.com') {
+    console.log(`[Stage 12] Pasting text via system clipboard into selector "${selector}" (${domain})...`);
+    return typeViaSystemPaste(selector, text, domain);
+  }
+
+  uploadToChrome(filePath, selector = 'input[type=file]', domain = 'google.com') {
+    console.log(`[Stage 12] Uploading "${filePath}" to Chrome selector "${selector}" (${domain})...`);
+    return uploadFileToChrome(filePath, selector, domain);
+  }
+
+  clickChromeHardware(x, y) {
+    console.log(`[Stage 12] Injecting hardware click at (${x}, ${y})...`);
+    return hardwareClick(x, y);
+  }
+
   // Execute full autonomous pipeline
   runFullPipeline() {
     console.log(`=======================================================`);
@@ -463,6 +504,13 @@ if (require.main === module) {
   let previewGif = false;
   let videoPath = null;
   let skipWeb = false;
+  let chromeDomain = 'google.com';
+  let chromeSelector = '';
+  let chromeText = '';
+  let chromeCode = '';
+  let chromeFile = '';
+  let chromeX = 0;
+  let chromeY = 0;
 
   for (let i = 0; i < args.length; i++) {
     if (args[i] === '--action' && args[i + 1]) {
@@ -536,13 +584,34 @@ if (require.main === module) {
       i++;
     } else if (args[i] === '--skip-web') {
       skipWeb = true;
+    } else if (args[i] === '--domain' && args[i + 1]) {
+      chromeDomain = args[i + 1];
+      i++;
+    } else if (args[i] === '--selector' && args[i + 1]) {
+      chromeSelector = args[i + 1];
+      i++;
+    } else if (args[i] === '--text' && args[i + 1]) {
+      chromeText = args[i + 1];
+      i++;
+    } else if (args[i] === '--code' && args[i + 1]) {
+      chromeCode = args[i + 1];
+      i++;
+    } else if (args[i] === '--file' && args[i + 1]) {
+      chromeFile = args[i + 1];
+      i++;
+    } else if (args[i] === '--x' && args[i + 1]) {
+      chromeX = Number(args[i + 1]);
+      i++;
+    } else if (args[i] === '--y' && args[i + 1]) {
+      chromeY = Number(args[i + 1]);
+      i++;
     } else if (args[i] === '--help') {
       console.log(`
 Usage:
   node pipeline_runner.js [options]
 
 Options:
-  --action <all|audit|cleanup|fit|export|generate|copy|voice|ae-status|animate|motion-clone|comp-to-gif|ai-video-status|video-ad|ps-status|ps-crop|ps-mask|ps-report|ps-slice|ps-csv|qc|qc-markers|diff> Pipeline action (default: all)
+  --action <all|audit|cleanup|fit|export|generate|copy|voice|ae-status|animate|motion-clone|comp-to-gif|ai-video-status|video-ad|ps-status|ps-crop|ps-mask|ps-report|ps-slice|ps-csv|qc|qc-markers|diff|chrome-status|chrome-eval|chrome-paste|chrome-upload|chrome-click> Pipeline action (default: all)
   --project <name>                                            Project folder name on Desktop (default: "Shahrukhz Waterfront Ad 01")
   --prompt <text>                                             Prompt or copy script for generation
   --ratio <1:1|16:9|9:16|4:3|3:4>                             Aspect ratio for image generation (default: 1:1)
@@ -565,6 +634,13 @@ Options:
   --before <path>                                             Before image/artboard path for visual diffing
   --after <path>                                              After image/artboard path for visual diffing
   --diff-mode <image|marked|all>                              Diff mode (image: side-by-side, marked: pins/boxes)
+  --domain <domain>                                           Target domain for Chrome automation (default: google.com)
+  --code <javascript>                                         JavaScript snippet to execute in Chrome tab
+  --selector <cssSelector>                                    DOM selector for Chrome paste or file upload
+  --text <string>                                             Text to type via system paste into Chrome
+  --file <path>                                               Local file to inject into Chrome <input type=file>
+  --x <number>                                                Screen X coordinate for hardware click
+  --y <number>                                                Screen Y coordinate for hardware click
   --help                                                      Show this help message
       `);
       process.exit(0);
@@ -670,6 +746,33 @@ Options:
       break;
     case 'export':
       pipeline.exportProductionDeliverables();
+      break;
+    case 'chrome-status':
+      pipeline.checkChromeStatus(chromeDomain);
+      break;
+    case 'chrome-eval':
+      if (!chromeCode) {
+        console.error("Error: --code <javascript> is required for chrome-eval");
+        process.exit(1);
+      }
+      pipeline.executeInChrome(chromeCode, chromeDomain);
+      break;
+    case 'chrome-paste':
+      if (!chromeSelector || !chromeText) {
+        console.error("Error: --selector <css> and --text <string> are required for chrome-paste");
+        process.exit(1);
+      }
+      pipeline.pasteInChrome(chromeSelector, chromeText, chromeDomain);
+      break;
+    case 'chrome-upload':
+      if (!chromeFile) {
+        console.error("Error: --file <path> is required for chrome-upload");
+        process.exit(1);
+      }
+      pipeline.uploadToChrome(chromeFile, chromeSelector || 'input[type=file]', chromeDomain);
+      break;
+    case 'chrome-click':
+      pipeline.clickChromeHardware(chromeX, chromeY);
       break;
     case 'all':
     default:

@@ -13,22 +13,34 @@
 const fs = require('fs');
 const path = require('path');
 
-const API_KEY = process.env.GEMINI_API_KEY || "";
+const API_KEY = process.env.GEMINI_API_KEY || process.env.GOOGLE_API_KEY || "";
 
 // 1. Text Copywriting (100% Free Tier via Google AI Studio)
 async function generateCopy(prompt) {
+  if (!API_KEY) {
+    throw new Error("GEMINI_API_KEY (or GOOGLE_API_KEY) environment variable is required for copywriting.");
+  }
   console.log(`[Multimodal Router] Generating ad copy via gemini-3-flash-preview (Free Tier)...`);
-  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=${API_KEY}`;
-  const res = await fetch(url, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      contents: [{ parts: [{ text: prompt }] }]
-    })
-  });
+  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent`;
+  let res;
+  try {
+    res = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-goog-api-key': API_KEY
+      },
+      body: JSON.stringify({
+        contents: [{ parts: [{ text: prompt }] }]
+      })
+    });
+  } catch (netErr) {
+    throw new Error(`Google AI Studio network failure: ${netErr.message}`);
+  }
+
   const data = await res.json();
-  if (data.error) {
-    throw new Error(`Google AI Studio Error: ${data.error.message}`);
+  if (!res.ok || data.error) {
+    throw new Error(`Google AI Studio Error: ${data.error?.message || res.statusText}`);
   }
   const text = data.candidates?.[0]?.content?.parts?.[0]?.text;
   return { success: true, text: text, modality: 'text', model: 'gemini-3-flash-preview', cost: '$0.00' };
@@ -36,27 +48,38 @@ async function generateCopy(prompt) {
 
 // 2. Audio Voiceover & Narration (100% Free Tier via Google AI Studio)
 async function generateVoiceover(scriptText, voiceName = "Aoede", outputPath) {
+  if (!API_KEY) {
+    throw new Error("GEMINI_API_KEY (or GOOGLE_API_KEY) environment variable is required for voiceover.");
+  }
   console.log(`[Multimodal Router] Generating narration via gemini-2.5-flash-preview-tts (Free Tier)...`);
-  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-tts:generateContent?key=${API_KEY}`;
-  const res = await fetch(url, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      contents: [{ parts: [{ text: scriptText }] }],
-      generationConfig: {
-        responseModalities: ["AUDIO"],
-        speechConfig: {
-          voiceConfig: {
-            prebuiltVoiceConfig: { voiceName: voiceName }
+  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-tts:generateContent`;
+  let res;
+  try {
+    res = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-goog-api-key': API_KEY
+      },
+      body: JSON.stringify({
+        contents: [{ parts: [{ text: scriptText }] }],
+        generationConfig: {
+          responseModalities: ["AUDIO"],
+          speechConfig: {
+            voiceConfig: {
+              prebuiltVoiceConfig: { voiceName: voiceName }
+            }
           }
         }
-      }
-    })
-  });
+      })
+    });
+  } catch (netErr) {
+    throw new Error(`Google AI Studio TTS network failure: ${netErr.message}`);
+  }
 
   const data = await res.json();
-  if (data.error) {
-    throw new Error(`Google AI Studio TTS Error: ${data.error.message}`);
+  if (!res.ok || data.error) {
+    throw new Error(`Google AI Studio TTS Error: ${data.error?.message || res.statusText}`);
   }
   const rawBase64 = data.candidates?.[0]?.content?.parts?.[0]?.inlineData?.data;
   if (!rawBase64) throw new Error("No audio data returned from Google AI Studio TTS");

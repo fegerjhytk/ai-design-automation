@@ -1,0 +1,16 @@
+{
+  "mcpServers": {
+    "ai-design-workflow": {
+      "command": "/Users/admin/.gemini/antigravity/bin/node",
+      "args": [
+        "/Users/admin/Documents/AI-Design-Automation/ai-design-workflow/server.js"
+      ],
+      "env": {
+        "OUTPUT_DIR": "/Users/admin/Desktop",
+        "DOWNLOADS_DIR": "/Users/admin/Downloads",
+        "DESIGN_REPO_DIR": "/Users/admin/Documents/AI-Design-Automation",
+        "PATH": "/Users/admin/.gemini/antigravity/bin:/Users/admin/.local/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
+      }
+    }
+  }
+}

@@ -39,6 +39,42 @@ function unpackDocument(sourcePath, destPath) {
         }
     }
 
+    // Unpack BG_Stars if multiple star groups are present inside a clipping mask
+    var starLayer = null;
+    var baseLayer = null;
+    for (var l = 0; l < doc.layers.length; l++) {
+        if (doc.layers[l].name == "BG_Stars" || doc.layers[l].name == "BG_Star") starLayer = doc.layers[l];
+        if (doc.layers[l].name == "BG_Base") baseLayer = doc.layers[l];
+    }
+    if (starLayer && starLayer.groupItems.length > 0) {
+        var mainGrp = starLayer.groupItems[0];
+        if (mainGrp.groupItems.length >= 2) {
+            mainGrp.clipped = false;
+            // Remove clipping path if present
+            for (var p = mainGrp.pageItems.length - 1; p >= 0; p--) {
+                var pi = mainGrp.pageItems[p];
+                if (pi.typename == "PathItem") {
+                    try { pi.remove(); } catch(e) {}
+                }
+            }
+            // Sort remaining star groups from left to right
+            var starGroups = [];
+            for (var g = 0; g < mainGrp.groupItems.length; g++) {
+                starGroups.push(mainGrp.groupItems[g]);
+            }
+            starGroups.sort(function(a, b) {
+                return a.geometricBounds[0] - b.geometricBounds[0];
+            });
+            for (var idx = 0; idx < starGroups.length; idx++) {
+                var nl = doc.layers.add();
+                nl.name = "BG_Stars_" + (idx + 1);
+                if (baseLayer) nl.move(baseLayer, ElementPlacement.PLACEBEFORE);
+                starGroups[idx].move(nl, ElementPlacement.PLACEATEND);
+            }
+            try { starLayer.remove(); } catch(e) {}
+        }
+    }
+
     // Save with PDF compatibility for After Effects COMP_CROPPED_LAYERS import
     var saveOpts = new IllustratorSaveOptions();
     saveOpts.pdfCompatible = true;

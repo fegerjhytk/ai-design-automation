@@ -1,0 +1,24 @@
+{
+  "name": "ai-design-workflow",
+  "version": "2.0.0",
+  "description": "Unified AI Design Workflow & Brand-Motion Engine MCP Server and Master Plugin",
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "verify": "node ../core-engine/verify_unified_workflow.js"
+  },
+  "keywords": [
+    "mcp",
+    "design-workflow",
+    "branding",
+    "illustrator",
+    "indesign",
+    "photoshop",
+    "after-effects",
+    "motion",
+    "anti-sameness"
+  ],
+  "author": "Antigravity",
+  "license": "MIT"
+}

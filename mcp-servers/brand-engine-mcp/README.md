@@ -18,3 +18,9 @@ The server runs headlessly over stdio via Node.js v18+:
 node /Users/admin/.gemini/config/plugins/brand-engine-mcp/server.js
 ```
 Registered automatically in Antigravity via `mcp_config.json`.
+
+## Core Pipeline & Workflow Rules
+
+- **Footage / Fotage Asset Staging**: Any unpacked `.ai` files prepared for After Effects animation must strictly be placed inside a dedicated `<Project>/Footage/` or `<Project>/Fotage/` folder, never left loose in root.
+- **Multi-Software Coordination**: When using 2 or more software applications simultaneously (Illustrator, After Effects, etc.), keep all apps and projects open throughout the work.
+- **No Export Required / Keep Open**: Do not produce final output video files (`.mp4`, `.mov`) unless explicitly requested. Simply save native `.aep`/`.ai` files and keep the projects open in the software for the user.

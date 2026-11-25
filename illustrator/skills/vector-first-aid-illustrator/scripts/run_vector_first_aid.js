@@ -38,7 +38,7 @@ function buildExtendScript(opts) {
     #include "${coreScriptPath}"
     (function() {
         if (app.documents.length === 0) {
-            return JSON.stringify({ error: "No open document in Adobe Illustrator." });
+            return VectorFirstAidCore.stringify({ error: "No open document in Adobe Illustrator." });
         }
         var doc = app.activeDocument;
         var mode = "${opts.mode}";
@@ -76,7 +76,7 @@ function buildExtendScript(opts) {
             app.redraw();
         }
 
-        return "RESULT_JSON:" + JSON.stringify(report);
+        return "RESULT_JSON:" + VectorFirstAidCore.stringify(report);
     })();
     `;
 }
@@ -97,7 +97,7 @@ function runExtendScript(jsxCode) {
             return out;
         } else {
             const cmd = `osascript -e 'tell application "Adobe Illustrator" to do javascript (POSIX file "${tmpJsx}")'`;
-            return execSync(cmd, { timeout: 30000 }).toString();
+            return execSync(cmd, { timeout: 120000 }).toString();
         }
     } finally {
         try { fs.unlinkSync(tmpJsx); } catch (e) {}

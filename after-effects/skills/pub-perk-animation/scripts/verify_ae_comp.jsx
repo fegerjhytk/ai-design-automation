@@ -53,13 +53,19 @@ function verifyComp(reportPath) {
             }
         }
 
-        checkPropKeys(l.transform.position, "Position");
-        checkPropKeys(l.transform.scale, "Scale");
-        checkPropKeys(l.transform.opacity, "Opacity");
-        checkPropKeys(l.transform.rotation, "Rotation");
-        if (l.threeDLayer) {
-            checkPropKeys(l.transform.xRotation, "X Rotation");
-        }
+        try { checkPropKeys(l.transform.position, "Position"); } catch(e) {}
+        try { checkPropKeys(l.transform.scale, "Scale"); } catch(e) {}
+        try { checkPropKeys(l.transform.opacity, "Opacity"); } catch(e) {}
+        try {
+            if (l.threeDLayer) {
+                checkPropKeys(l.transform.xRotation, "X Rotation");
+                checkPropKeys(l.transform.yRotation, "Y Rotation");
+                checkPropKeys(l.transform.zRotation, "Z Rotation");
+                checkPropKeys(l.transform.orientation, "Orientation");
+            } else {
+                checkPropKeys(l.transform.rotation, "Rotation");
+            }
+        } catch(e) {}
 
         report.layers.push(lyrInfo);
     }

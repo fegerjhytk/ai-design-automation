@@ -4,29 +4,49 @@
  * after_effects_motion_controller.js
  * 
  * Master After Effects Controller integrated into AI Design Automation:
- * Unifies the 4 After Effects skills:
+ * Unifies the After Effects skills:
  * 1. after-effects-puppet-animations (Reading flow, kinetic puppet animation from .ai layers)
  * 2. pub-perk-animation (Automated 10s multi-offer promo motion graphics to .aep)
- * 3. zigma-commercial-video-production (9:16 mobile product videos, floating buoyancy physics, 3D callout badges)
- * 4. zigma-start-opener-video (Timeline architecture and opener sequences)
+ * 3. zigma-video-production (9:16 mobile product videos, start/opener architecture, floating buoyancy, 3D callout badges)
  */
 
 const fs = require('fs');
 const path = require('path');
 const { execSync, spawnSync } = require('child_process');
 
-const SKILLS_DIR = path.resolve(__dirname, '../../');
-const PUPPET_SKILL_DIR = path.join(SKILLS_DIR, 'after-effects-puppet-animations');
-const PUB_PERK_SKILL_DIR = path.join(SKILLS_DIR, 'pub-perk-animation');
-const ZIGMA_PROD_SKILL_DIR = path.join(SKILLS_DIR, 'zigma-commercial-video-production');
-const ZIGMA_OPENER_SKILL_DIR = path.join(SKILLS_DIR, 'zigma-start-opener-video');
-const QC_DIFF_SKILL_DIR = path.join(SKILLS_DIR, 'design-qc-visual-diff');
-const AE_MOTION_CLONE_SKILL_DIR = path.join(SKILLS_DIR, 'ae-motion-clone');
-const AE_COMP_TO_GIF_SKILL_DIR = path.join(SKILLS_DIR, 'ae-comp-to-gif');
+function resolveSkillDir(skillName) {
+  const candidates = [
+    path.resolve(__dirname, '../../', skillName),
+    path.resolve(__dirname, '../../../after-effects/skills', skillName),
+    path.resolve(__dirname, '../../../indesign/skills', skillName),
+    path.resolve(__dirname, '../../../illustrator/skills', skillName),
+    path.join(process.env.HOME || '', '.gemini/config/skills', skillName)
+  ];
+  for (const candidate of candidates) {
+    if (fs.existsSync(candidate)) {
+      return candidate;
+    }
+  }
+  return candidates[0];
+}
 
-const AE_APP_NAME = process.env.AFTER_EFFECTS_APP || 'Adobe After Effects 2026';
-const AE_APP_PATH = '/Applications/Adobe After Effects 2026/Adobe After Effects 2026.app';
-const AERENDER_PATH = '/Applications/Adobe After Effects 2026/aerender';
+const SKILLS_DIR = resolveSkillDir('design-automation') === path.resolve(__dirname, '..')
+  ? path.resolve(__dirname, '../../')
+  : path.join(process.env.HOME || '', '.gemini/config/skills');
+const PUPPET_SKILL_DIR = resolveSkillDir('after-effects-puppet-animations');
+const PUB_PERK_SKILL_DIR = resolveSkillDir('pub-perk-animation');
+const ZIGMA_SKILL_DIR = resolveSkillDir('zigma-video-production');
+const QC_DIFF_SKILL_DIR = resolveSkillDir('design-qc-visual-diff');
+const AE_MOTION_CLONE_SKILL_DIR = resolveSkillDir('ae-motion-clone');
+const AE_COMP_TO_GIF_SKILL_DIR = resolveSkillDir('ae-comp-to-gif');
+const AE_VERTICAL_REEL_SKILL_DIR = resolveSkillDir('ae-vertical-reel-editor');
+
+const AE_DETECTED_YEAR = fs.existsSync('/Applications/Adobe After Effects 2027/Adobe After Effects 2027.app')
+  ? '2027'
+  : '2026';
+const AE_APP_NAME = process.env.AFTER_EFFECTS_APP || `Adobe After Effects ${AE_DETECTED_YEAR}`;
+const AE_APP_PATH = `/Applications/Adobe After Effects ${AE_DETECTED_YEAR}/Adobe After Effects ${AE_DETECTED_YEAR}.app`;
+const AERENDER_PATH = `/Applications/Adobe After Effects ${AE_DETECTED_YEAR}/aerender`;
 
 /**
  * 1. Health & Environment Audit
@@ -40,11 +60,11 @@ function checkAfterEffectsHealth() {
     skillsFound: {
       puppetAnimations: fs.existsSync(PUPPET_SKILL_DIR),
       pubPerkAnimation: fs.existsSync(PUB_PERK_SKILL_DIR),
-      zigmaProduction: fs.existsSync(ZIGMA_PROD_SKILL_DIR),
-      zigmaOpener: fs.existsSync(ZIGMA_OPENER_SKILL_DIR),
+      zigmaVideoProduction: fs.existsSync(ZIGMA_SKILL_DIR),
       qcVisualDiff: fs.existsSync(QC_DIFF_SKILL_DIR),
       motionClone: fs.existsSync(AE_MOTION_CLONE_SKILL_DIR),
       compToGif: fs.existsSync(AE_COMP_TO_GIF_SKILL_DIR),
+      verticalReelEditor: fs.existsSync(AE_VERTICAL_REEL_SKILL_DIR),
     }
   };
 
@@ -169,10 +189,10 @@ function animatePromoComp(aiFilePath, options = {}) {
 }
 
 /**
- * 5. Floating Wave Buoyancy & Physics (zigma-commercial-video-production)
+ * 5. Floating Wave Buoyancy & Physics (zigma-video-production)
  */
 function applyBuoyancyPhysics(compName = "Main Comp", layerNames = []) {
-  const buoyancyScript = path.join(ZIGMA_PROD_SKILL_DIR, 'scripts', 'apply_wave_buoyancy.jsx');
+  const buoyancyScript = path.join(ZIGMA_SKILL_DIR, 'scripts', 'apply_wave_buoyancy.jsx');
   if (!fs.existsSync(buoyancyScript)) {
     throw new Error(`Buoyancy script not found at: ${buoyancyScript}`);
   }
@@ -202,9 +222,15 @@ function renderAEPComposition(aepPath, compName, outputPath) {
   }
 
   console.log(`[After Effects] Rendering composition "${compName}" to: ${outputPath}`);
-  const cmd = `"${AERENDER_PATH}" -project "${aepPath}" -comp "${compName}" -output "${outputPath}"`;
-  const res = execSync(cmd, { encoding: 'utf8' });
-  return { success: true, outputPath, stdout: res };
+  const res = spawnSync(AERENDER_PATH, ['-project', aepPath, '-comp', compName, '-output', outputPath], {
+    encoding: 'utf8',
+    maxBuffer: 50 * 1024 * 1024
+  });
+
+  if (res.status !== 0) {
+    throw new Error(`aerender failed with code ${res.status}: ${res.stderr || res.stdout}`);
+  }
+  return { success: true, outputPath, stdout: res.stdout };
 }
 
 /**
@@ -222,14 +248,27 @@ function buildAIVideoShowcaseComp(options = {}) {
   const audioDir = path.join(projectDir, '(Footage)', 'Audio');
   fs.mkdirSync(audioDir, { recursive: true });
 
-  const sfxLibraryDir = path.join(
-    process.env.HOME,
-    'Library/CloudStorage/GoogleDrive-deepaanshukumar@gmail.com/Shared drives/Zept/After effect effect_assect/05_Audio & SFX'
-  );
+  // Resolve SFX library path dynamically from env or active Google Drive storage
+  let sfxLibraryDir = process.env.SFX_LIBRARY_DIR || '';
+  if (!sfxLibraryDir) {
+    const cloudStorageDir = path.join(process.env.HOME, 'Library/CloudStorage');
+    if (fs.existsSync(cloudStorageDir)) {
+      try {
+        const driveFolders = fs.readdirSync(cloudStorageDir).filter(f => f.startsWith('GoogleDrive-'));
+        for (const df of driveFolders) {
+          const candidate = path.join(cloudStorageDir, df, 'Shared drives/Zept/After effect effect_assect/05_Audio & SFX');
+          if (fs.existsSync(candidate)) {
+            sfxLibraryDir = candidate;
+            break;
+          }
+        }
+      } catch (_) {}
+    }
+  }
 
-  const whooshB = path.join(sfxLibraryDir, 'SFX/Sound Effects/Whooshes/14 Fast Whoosh B.wav');
-  const whooshSimple = path.join(sfxLibraryDir, 'SFX/Sound Effects/Whooshes/17 Simple_Whoosh.wav');
-  const flash = path.join(sfxLibraryDir, 'SFX/Sound Effects V4/camera shot flash 2.mp3');
+  const whooshB = sfxLibraryDir ? path.join(sfxLibraryDir, 'SFX/Sound Effects/Whooshes/14 Fast Whoosh B.wav') : '';
+  const whooshSimple = sfxLibraryDir ? path.join(sfxLibraryDir, 'SFX/Sound Effects/Whooshes/17 Simple_Whoosh.wav') : '';
+  const flash = sfxLibraryDir ? path.join(sfxLibraryDir, 'SFX/Sound Effects V4/camera shot flash 2.mp3') : '';
 
   if (fs.existsSync(whooshB) && !fs.existsSync(path.join(audioDir, '14 Fast Whoosh B.wav'))) {
     fs.copyFileSync(whooshB, path.join(audioDir, '14 Fast Whoosh B.wav'));
@@ -272,12 +311,12 @@ function preflightArtworkForAnimation(aiPath) {
   if (!fs.existsSync(runnerPath)) {
     return { success: false, error: "design-qc-visual-diff skill not found" };
   }
-  try {
-    const res = execSync(`python3 "${runnerPath}" --active`, { encoding: 'utf8', stdio: ['pipe', 'pipe', 'pipe'] });
-    return { success: true, output: res };
-  } catch (err) {
-    return { success: false, error: err.message, output: err.stdout };
+  const args = aiPath ? ['--file', aiPath] : ['--active'];
+  const res = spawnSync('python3', [runnerPath, ...args], { encoding: 'utf8', maxBuffer: 10 * 1024 * 1024 });
+  if (res.status !== 0) {
+    return { success: false, error: res.stderr || 'QC audit failed', output: res.stdout };
   }
+  return { success: true, output: res.stdout };
 }
 
 /**
@@ -292,13 +331,12 @@ function generateAnimationVisualDiff(beforePath, afterPath, outputDir, mode = 'a
     return { success: false, error: "visual_diff_engine.py not found in design-qc-visual-diff" };
   }
   const out = outputDir || path.join(process.env.HOME, 'Downloads', 'AE_Visual_Diff');
-  try {
-    const cmd = `uv run --with pillow python3 "${enginePath}" --before "${beforePath}" --after "${afterPath}" --mode ${mode} --output "${out}"`;
-    const res = execSync(cmd, { encoding: 'utf8', stdio: ['pipe', 'pipe', 'pipe'] });
-    return { success: true, outputDir: out, log: res };
-  } catch (err) {
-    return { success: false, error: err.message, output: err.stdout };
+  const args = ['run', '--with', 'pillow', 'python3', enginePath, '--before', beforePath, '--after', afterPath, '--mode', mode, '--output', out];
+  const res = spawnSync('uv', args, { encoding: 'utf8', maxBuffer: 10 * 1024 * 1024 });
+  if (res.status !== 0) {
+    return { success: false, error: res.stderr || 'Visual diff generation failed', output: res.stdout };
   }
+  return { success: true, outputDir: out, log: res.stdout };
 }
 
 /**
@@ -406,8 +444,7 @@ if (require.main === module) {
   console.log(`  Skills Integrated:`);
   console.log(`    - Puppet Animations:   ${health.skillsFound.puppetAnimations ? '✓ Ready' : '✗ Missing'}`);
   console.log(`    - Pub Perk Promo Comp: ${health.skillsFound.pubPerkAnimation ? '✓ Ready' : '✗ Missing'}`);
-  console.log(`    - Zigma Video Prod:    ${health.skillsFound.zigmaProduction ? '✓ Ready' : '✗ Missing'}`);
-  console.log(`    - Zigma Opener Video:  ${health.skillsFound.zigmaOpener ? '✓ Ready' : '✗ Missing'}`);
+  console.log(`    - Zigma Video Prod:    ${health.skillsFound.zigmaVideoProduction ? '✓ Ready' : '✗ Missing'}`);
   console.log(`    - QC & Visual Diff:    ${health.skillsFound.qcVisualDiff ? '✓ Ready' : '✗ Missing'}`);
   console.log(`    - AE Motion Clone:     ${health.skillsFound.motionClone ? '✓ Ready' : '✗ Missing'}`);
   console.log(`    - AE Smooth GIF:       ${health.skillsFound.compToGif ? '✓ Ready' : '✗ Missing'}`);

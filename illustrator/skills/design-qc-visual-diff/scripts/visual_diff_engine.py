@@ -15,6 +15,20 @@ import argparse
 from pathlib import Path
 from PIL import Image, ImageDraw, ImageFont, ImageChops
 
+def render_pdf_pages(pdf_path: Path, output_dir: Path, dpi=300):
+    """Renders all pages of a PDF into high-res PNG files at specified DPI."""
+    import fitz
+    output_dir.mkdir(parents=True, exist_ok=True)
+    doc = fitz.open(str(pdf_path))
+    mat = fitz.Matrix(dpi / 72.0, dpi / 72.0)
+    rendered = []
+    for i, page in enumerate(doc):
+        pix = page.get_pixmap(matrix=mat, alpha=False)
+        p_path = output_dir / f"page_{i+1:02d}.png"
+        pix.save(str(p_path))
+        rendered.append(p_path)
+    return rendered
+
 def compute_pixel_diff_boxes(img_before: Image.Image, img_after: Image.Image, threshold=20, cell_size=24, min_area=300):
     """
     Computes differences between two images and groups changed pixels into bounding boxes.
@@ -333,7 +347,7 @@ def main():
     parser.add_argument("--before", required=True, help="Path to Before image or directory")
     parser.add_argument("--after", required=True, help="Path to After image or directory")
     parser.add_argument("--mode", choices=["image", "marked", "all"], default="all", help="Diff comparison mode")
-    parser.add_argument("--output", default="/tmp/qc_diff_output", help="Output directory")
+    parser.add_argument("--output", default="/Users/admin/Downloads/QC_Images", help="Output directory (always defaults to Downloads)")
     parser.add_argument("--threshold", type=int, default=20, help="Pixel difference threshold (0-255)")
     args = parser.parse_args()
 
@@ -345,7 +359,14 @@ def main():
 
     pairs = []
     if b_path.is_file() and a_path.is_file():
-        pairs.append((b_path, a_path, "01"))
+        if b_path.suffix.lower() == ".pdf" or a_path.suffix.lower() == ".pdf":
+            print("Detected PDF inputs. Rendering pages at 300 DPI...")
+            b_rendered = render_pdf_pages(b_path, out_dir / "before")
+            a_rendered = render_pdf_pages(a_path, out_dir / "after")
+            for i in range(min(len(b_rendered), len(a_rendered))):
+                pairs.append((b_rendered[i], a_rendered[i], f"{i+1:02d}"))
+        else:
+            pairs.append((b_path, a_path, "01"))
     elif b_path.is_dir() and a_path.is_dir():
         # Match files by slide number
         b_files = sorted(list(b_path.glob("*.png")))

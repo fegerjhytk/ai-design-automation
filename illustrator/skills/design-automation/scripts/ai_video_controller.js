@@ -39,7 +39,7 @@ function checkAIVideoEnginesHealth() {
       motionClone: aeHealth.skillsFound.motionClone,
       compToGif: aeHealth.skillsFound.compToGif,
       puppetAnimations: aeHealth.skillsFound.puppetAnimations,
-      zigmaProduction: aeHealth.skillsFound.zigmaProduction
+      zigmaVideoProduction: aeHealth.skillsFound.zigmaVideoProduction
     },
     googleFlow: {
       pluginInstalled: flowFound,
@@ -137,7 +137,7 @@ if (require.main === module) {
   console.log(`   - Motion Clone Skill: ${health.afterEffects.motionClone ? '✓ Ready (ae-motion-clone)' : '✗ Missing'}`);
   console.log(`   - Smooth GIF Skill:   ${health.afterEffects.compToGif ? '✓ Ready (ae-comp-to-gif)' : '✗ Missing'}`);
   console.log(`   - Puppet Animations:  ${health.afterEffects.puppetAnimations ? '✓ Ready' : '✗ Missing'}`);
-  console.log(`   - Zigma 9:16 Video:   ${health.afterEffects.zigmaProduction ? '✓ Ready' : '✗ Missing'}`);
+  console.log(`   - Zigma 9:16 Video:   ${health.afterEffects.zigmaVideoProduction ? '✓ Ready' : '✗ Missing'}`);
   console.log("2. Google Flow Cloud AI Video:");
   console.log(`   - Google Flow Plugin: ${health.googleFlow.pluginInstalled ? '✓ Ready' : '✗ Missing'}`);
   console.log(`   - Video Generation:   Omni 1.2 Flash (16:9 / 9:16 Widescreen & Reels)`);

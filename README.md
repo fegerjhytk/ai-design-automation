@@ -7,12 +7,25 @@
 
 ```
 AI-Design-Automation/
+├── ai-design-workflow/        # Unified Antigravity Plugin, Master Skill & MCP Server
+│   ├── plugin.json            # Single unified plugin manifest
+│   ├── mcp_config.json        # Unified MCP server registration
+│   ├── server.js              # Consolidated Brand-Motion + Design Workflow MCP server
+│   ├── lib/                   # Anti-sameness, kerning, Illustrator, staging, motion, workflow
+│   ├── rules/AGENTS.md        # Consolidated design & multi-app lifecycle rules
+│   └── skills/                # Master ai-design-workflow orchestrator & anti-sameness skill
+├── chrome-bridge/             # Manifest V3 Chrome Extension + Token-Secured 127.0.0.1 Bridge
+│   ├── bridge_server.js       # Local HTTP bridge (AI Design Workflow + agentapi)
+│   ├── bridge_core.js         # Token management, origin checks & dispatchers
+│   ├── start_bridge.sh        # Convenience launcher & token printer
+│   └── extension/             # Load-unpacked Chrome MV3 Side Panel extension
 ├── core-engine/               # Multi-ratio layout engine & Python orchestration
 │   ├── pipeline.py            # Primary pipeline coordinator
 │   ├── layout.py              # Geometric bounds and aspect ratio solver (1:1, 9:16, 16:9)
 │   ├── preflight.py           # Preflight checks (bleed, DPI, missing fonts, overflows)
 │   ├── run.py                 # Multi-task runner
-│   └── test_pipeline.js       # End-to-end pipeline validator
+│   ├── test_pipeline.js       # GSD verification validator
+│   └── verify_unified_workflow.js # End-to-end unified verification harness
 ├── illustrator/               # Adobe Illustrator CC vector engine
 │   ├── scripts/
 │   │   ├── TypeFlow.jsx       # Automated typography layout & text frame constraints
@@ -26,7 +39,8 @@ AI-Design-Automation/
 │       ├── autonomous-ad-designer/ # Multi-variant ad generation with Codex design critique
 │       ├── vector-first-aid-illustrator/ # Automated path cleanup & repair
 │       ├── recreate-image-in-illustrator/ # Faithful raster-to-vector reconstruction
-│       └── canva-illustrator-uploader/ # Direct .ai to Canva cloud publishing
+│       ├── canva-illustrator-uploader/ # Direct .ai to Canva cloud publishing
+│       └── illustrator-journal-starter/ # Unified brief-to-journal starter & template transform
 ├── indesign/                  # Adobe InDesign CC editorial & print engine
 │   └── skills/
 │       ├── indesign-batch-export/ # Headless accelerated batch export (PDF, IDML, PNG)
@@ -37,11 +51,11 @@ AI-Design-Automation/
 │   └── skills/
 │       ├── ae-comp-to-gif/    # Butter-smooth GIF exporter with 50/25/20 FPS harmonics
 │       ├── ae-motion-clone/   # Reference video motion & physics bounce/wobble cloner
+│       ├── ae-vertical-reel-editor/ # 9:16 vertical montage reels (hooks, 50fps precomps, selective zooms)
 │       ├── audio-video-sync-workflow/ # Kinetic typography & audio sync (Whisper/GSAP)
 │       ├── after-effects-puppet-animations/ # Illustrator artwork to puppet rigged animation
-│       ├── zigma-commercial-video-production/ # Commercial video ad sequences
-│       ├── zigma-start-opener-video/ # Dynamic 9:16 vertical video opener sequences
-│       └── pub-perk-animation/ # Keyframe rigs and motion presets
+│       ├── pub-perk-animation/ # Keyframe rigs and motion presets
+│       └── zigma-video-production/ # Unified 9:16 commercial & opener video standards
 ├── photoshop/                 # Adobe Photoshop batch processing
 │   └── scripts/
 │       └── photoshop-resize.cjs # Headless Smart Object & canvas asset normalizer

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>Label</key>
+  <string>com.antigravity.designbridge</string>
+  <key>ProgramArguments</key>
+  <array>
+    <string>/Users/admin/.gemini/antigravity/bin/node</string>
+    <string>/Users/admin/Documents/AI-Design-Automation/chrome-bridge/bridge_server.js</string>
+  </array>
+  <key>EnvironmentVariables</key>
+  <dict>
+    <key>OUTPUT_DIR</key>
+    <string>/Users/admin/Desktop</string>
+    <key>DOWNLOADS_DIR</key>
+    <string>/Users/admin/Downloads</string>
+    <key>DESIGN_REPO_DIR</key>
+    <string>/Users/admin/Documents/AI-Design-Automation</string>
+    <key>PATH</key>
+    <string>/Users/admin/.gemini/antigravity/bin:/Users/admin/.local/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin</string>
+  </dict>
+  <key>RunAtLoad</key>
+  <true/>
+  <key>KeepAlive</key>
+  <true/>
+  <key>StandardOutPath</key>
+  <string>/tmp/ai-design-bridge.out.log</string>
+  <key>StandardErrorPath</key>
+  <string>/tmp/ai-design-bridge.err.log</string>
+</dict>
+</plist>

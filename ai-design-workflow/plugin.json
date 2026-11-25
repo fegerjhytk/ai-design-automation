@@ -1,0 +1,13 @@
+{
+  "name": "ai-design-workflow",
+  "displayName": "AI Design Workflow",
+  "version": "2.0.0",
+  "description": "AI Design Workflow — unified plugin, master skill, and MCP server combining Brand & Motion Engine tools with Illustrator, Photoshop, InDesign, After Effects, and visual QC automation.",
+  "suggestedPrompts": [
+    "Check my unified AI Design Workflow status and Adobe/Chrome readiness",
+    "Run an anti-sameness category audit and build an unflattened Illustrator brand identity",
+    "Audit typographic kerning for my brand wordmark and generate a retail shelf mockup prompt",
+    "Create a frame-accurate GSAP and After Effects kinetic motion timeline",
+    "Run Design QC, Visual Diff, or InDesign batch export on my project"
+  ]
+}

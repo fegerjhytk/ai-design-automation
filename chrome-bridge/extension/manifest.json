@@ -1,0 +1,25 @@
+{
+  "manifest_version": 3,
+  "name": "AI Design Workflow Bridge",
+  "version": "1.0.0",
+  "description": "Connects your browser tabs (references, briefs, Google Flow, Canva, Instagram) to your local AI Design Workflow & Antigravity via a token-secured 127.0.0.1 bridge.",
+  "permissions": [
+    "activeTab",
+    "scripting",
+    "storage",
+    "sidePanel"
+  ],
+  "host_permissions": [
+    "http://127.0.0.1/*"
+  ],
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "action": {
+    "default_title": "Open AI Design Workflow"
+  },
+  "side_panel": {
+    "default_path": "sidepanel.html"
+  }
+}

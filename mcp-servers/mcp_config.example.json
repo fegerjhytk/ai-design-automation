@@ -59,14 +59,15 @@
         "MAGNIFIC_DOWNLOAD_DIR": "/Users/admin/Downloads"
       }
     },
-    "brand_engine": {
-      "command": "node",
+    "ai-design-workflow": {
+      "command": "/Users/admin/.gemini/antigravity/bin/node",
       "args": [
-        "/Users/admin/.gemini/config/plugins/brand-engine-mcp/server.js"
+        "/Users/admin/Documents/AI-Design-Automation/ai-design-workflow/server.js"
       ],
       "env": {
         "OUTPUT_DIR": "/Users/admin/Desktop",
-        "DOWNLOADS_DIR": "/Users/admin/Downloads"
+        "DOWNLOADS_DIR": "/Users/admin/Downloads",
+        "DESIGN_REPO_DIR": "/Users/admin/Documents/AI-Design-Automation"
       }
     },
     "rea": {

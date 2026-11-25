@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Design Workflow Bridge</title>
+  <link rel="stylesheet" href="sidepanel.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div>
+      <h1>AI Design Workflow</h1>
+      <p id="bridge-status-text" class="status-pill offline">Bridge: Checking...</p>
+    </div>
+    <button id="refresh-status-btn" type="button" class="btn-secondary">Refresh</button>
+  </header>
+
+  <section class="card capture-card">
+    <div class="row-between">
+      <strong>Active Tab Context</strong>
+      <button id="capture-tab-btn" type="button" class="btn-secondary">Capture Tab</button>
+    </div>
+    <div id="tab-preview" class="tab-preview muted">Click "Capture Tab" to attach current page URL, selection, and images.</div>
+  </section>
+
+  <nav class="tabs" role="tablist">
+    <button type="button" class="tab-btn active" data-tab="antigravity">Antigravity</button>
+    <button type="button" class="tab-btn" data-tab="tools">Local Tools</button>
+    <button type="button" class="tab-btn" data-tab="settings">Settings</button>
+  </nav>
+
+  <main>
+    <section id="panel-antigravity" class="tab-panel active">
+      <div class="card">
+        <label class="field-label" for="agy-prompt">Task Prompt</label>
+        <textarea id="agy-prompt" rows="4" placeholder="e.g. Recreate this design in Illustrator, or build an ad creative from this page..."></textarea>
+
+        <div class="preset-row">
+          <button type="button" class="preset-chip" data-preset="Build a 1080x1080 ad creative in Illustrator using the captured brief/reference via ai-design-workflow.">Ad Creative</button>
+          <button type="button" class="preset-chip" data-preset="Recreate the attached reference design as editable Illustrator artwork via recreate-image-in-illustrator.">Recreate in AI</button>
+          <button type="button" class="preset-chip" data-preset="Run an anti-sameness brand audit and kerning check for this brand.">Brand Audit</button>
+          <button type="button" class="preset-chip" data-preset="Analyze this reference motion/reel and apply it in After Effects via ae-motion-clone.">Motion Clone</button>
+        </div>
+
+        <label class="checkbox-row">
+          <input id="agy-attach-tab" type="checkbox" checked />
+          <span>Attach captured tab URL, selection, and images</span>
+        </label>
+
+        <div class="grid-2">
+          <div>
+            <label class="field-label" for="agy-mode">Mode</label>
+            <select id="agy-mode">
+              <option value="new-conversation">New Conversation</option>
+              <option value="send-message">Existing Conversation</option>
+            </select>
+          </div>
+          <div>
+            <label class="field-label" for="agy-model">Model</label>
+            <select id="agy-model">
+              <option value="">Default</option>
+              <option value="pro">Pro</option>
+              <option value="flash">Flash</option>
+              <option value="flash_lite">Flash Lite</option>
+            </select>
+          </div>
+        </div>
+
+        <div id="agy-convo-wrap" class="hidden">
+          <label class="field-label" for="agy-convo-id">Conversation ID</label>
+          <input id="agy-convo-id" type="text" placeholder="e.g. 11073600-f47e-4102-9aa5-db6c626dcf82" />
+        </div>
+
+        <button id="send-agy-btn" type="button" class="btn-primary">Send to Antigravity</button>
+      </div>
+    </section>
+
+    <section id="panel-tools" class="tab-panel">
+      <div class="card">
+        <label class="field-label" for="tool-select">Tool</label>
+        <select id="tool-select">
+          <option value="brand_anti_sameness_audit">Anti-Sameness Brand Audit</option>
+          <option value="audit_typographic_kerning">Typographic Kerning Audit</option>
+          <option value="motion_sync_timeline">Motion Sync Timeline (GSAP + AE JSX)</option>
+          <option value="stage_environmental_mockup">Stage Environmental Mockup Prompt</option>
+          <option value="design_workflow_run_action">Run Pipeline Action (Illustrator / PS / AE)</option>
+          <option value="design_workflow_preflight">Run Core-Engine Preflight Tests</option>
+          <option value="design_workflow_status">Full Environment Status</option>
+        </select>
+
+        <div id="tool-fields" class="tool-fields"></div>
+
+        <button id="run-tool-btn" type="button" class="btn-primary">Run Local Tool</button>
+      </div>
+    </section>
+
+    <section id="panel-settings" class="tab-panel">
+      <div class="card">
+        <label class="field-label" for="bridge-url">Bridge URL</label>
+        <input id="bridge-url" type="text" value="http://127.0.0.1:4815" />
+
+        <label class="field-label" for="bridge-token">Bridge Token (X-Bridge-Token)</label>
+        <input id="bridge-token" type="password" placeholder="Paste token from start_bridge.sh --print-token" />
+
+        <div class="btn-row">
+          <button id="save-settings-btn" type="button" class="btn-primary">Save &amp; Test</button>
+          <button id="toggle-token-btn" type="button" class="btn-secondary">Show</button>
+        </div>
+        <p class="hint">
+          Token is generated at <code>~/.gemini/config/ai-design-bridge.token</code> when you run
+          <code>chrome-bridge/start_bridge.sh</code>.
+        </p>
+      </div>
+    </section>
+
+    <section class="card output-card">
+      <div class="row-between">
+        <strong>Response Output</strong>
+        <button id="copy-output-btn" type="button" class="btn-secondary">Copy</button>
+      </div>
+      <pre id="output-log" class="output-log">Ready.</pre>
+    </section>
+  </main>
+
+  <script src="sidepanel.js"></script>
+</body>
+</html>

@@ -1,12 +1,18 @@
 {
   "name": "design-automation",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "version": "1.0.1",
+  "description": "Universal Adobe Illustrator, Photoshop, and After Effects design automation workflow",
+  "main": "scripts/pipeline_runner.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node --check scripts/pipeline_runner.js scripts/illustrator_menu_controller.js scripts/after_effects_motion_controller.js scripts/ai_video_controller.js scripts/photoshop_mars_controller.js scripts/multimodal_router.js scripts/fast_nano_banana.js scripts/chrome_active_tab_controller.js"
   },
-  "keywords": [],
+  "keywords": [
+    "adobe",
+    "illustrator",
+    "after-effects",
+    "photoshop",
+    "design-automation"
+  ],
   "type": "commonjs",
   "dependencies": {
     "@google/genai": "^3.0.0"
