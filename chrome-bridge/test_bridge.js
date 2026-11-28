@@ -184,7 +184,7 @@ async function main() {
       assert.ok(mockAgentCalls[0].argv[2].includes("Page URL: https://example.org"));
     });
 
-    await runCheck("Manifest V3 Chrome extension files are valid and CSP-compliant", () => {
+    await runCheck("Manifest V3 Chrome extension files are valid, CSP-compliant, and DOM-wired", () => {
       const extDir = path.join(__dirname, "extension");
       const manifest = JSON.parse(fs.readFileSync(path.join(extDir, "manifest.json"), "utf8"));
       assert.equal(manifest.manifest_version, 3);
@@ -194,7 +194,19 @@ async function main() {
         assert.equal(fs.existsSync(path.join(extDir, rel)), true, `Missing ${rel}`);
       }
       const html = fs.readFileSync(path.join(extDir, "sidepanel.html"), "utf8");
+      const css = fs.readFileSync(path.join(extDir, "sidepanel.css"), "utf8");
+      const js = fs.readFileSync(path.join(extDir, "sidepanel.js"), "utf8");
       assert.equal(/<script[^>]*>[^<]+<\/script>/i.test(html), false, "No inline scripts allowed in MV3");
+      assert.equal(/\son(?:click|error|load|change|input)\s*=/i.test(html), false, "No inline event handlers allowed in MV3");
+      assert.ok(css.includes("overflow-x: hidden"), "Sidepanel CSS must prevent horizontal overflow");
+      assert.ok(css.includes("@container"), "Sidepanel CSS must include container query adaptation");
+      assert.ok(css.includes("#1e1e1e") && css.includes("#2c2c2c") && css.includes("#0d99ff"), "Figma dark tokens missing");
+      assert.ok(css.includes("outline: none"), "Sidepanel CSS must strip focus outlines");
+
+      const referencedIds = Array.from(js.matchAll(/\$\("([a-zA-Z0-9_-]+)"\)/g)).map((m) => m[1]);
+      for (const id of referencedIds) {
+        assert.equal(html.includes(`id="${id}"`), true, `Missing DOM id="${id}" in sidepanel.html`);
+      }
     });
   } finally {
     if (server) server.close();
